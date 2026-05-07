@@ -1,0 +1,12 @@
+{
+  "name": "design-to-pr",
+  "private": true,
+  "version": "1.0.0",
+  "workspaces": [
+    "shared/*"
+  ],
+  "scripts": {
+    "dev": "node scripts/preview.js",
+    "import-design-system": "node scripts/import-design-system.js"
+  }
+}

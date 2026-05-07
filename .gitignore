@@ -1,0 +1,4 @@
+node_modules
+dist
+*.local
+shared/preview-template/src/mockup
