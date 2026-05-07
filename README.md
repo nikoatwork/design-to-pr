@@ -1,14 +1,19 @@
 # Design-to-PR
 
-Mock up frontend flows using a client's real React components and design system.
+A starter repo for creating runnable frontend mockups with one client's real design system.
 
-## Philosophy
-
-- **One repo per client.** Install whatever that client's components need. No abstraction layers.
-- **Lean.** Vite + React + Tailwind. No routing, no state management, no providers unless the client needs them.
-- **Composable.** The base repo is un-opinionated. The `import-design-system` script is a convenience, not a framework.
+Use one copy of this repo per client. Drop in that client's components, create isolated mockups in `mockups/`, and preview them locally without bringing over product logic.
 
 ## Quick Start
+
+```bash
+npm install
+npm run dev fintech-dashboard
+```
+
+Open the local URL from Vite to see the flagship example.
+
+## Agency Workflow
 
 ### 1. Import the client's design system
 
@@ -16,65 +21,60 @@ Mock up frontend flows using a client's real React components and design system.
 npm run import-design-system /path/to/client/src/components
 ```
 
-This script:
-- Copies the folder into `client-design-system/`
-- Scans every file for broken imports
-- Stubs or removes anything that can't be resolved
-- Prints a list of npm dependencies you may need to install
+The import script copies files into `client-design-system/`, scans for broken imports, stubs anything that cannot run in isolation, and prints dependencies you may need to install.
 
-### 2. Install any missing dependencies
+### 2. Create a mockup
 
 ```bash
-npm install clsx tailwind-merge @radix-ui/react-slot
+npm run new-flow onboarding-flow
 ```
 
-(Whatever the script reported.)
+This creates:
 
-### 3. Create a flow
-
-```bash
-mkdir -p mockups/onboarding-flow/src
+```text
+mockups/onboarding-flow/
+├── README.md
+└── src/App.tsx
 ```
 
-Write `mockups/onboarding-flow/src/App.tsx`:
+### 3. Ask an AI agent to build the screen
 
-```tsx
-import { Button } from '../../client-design-system/components/Button'
+Use [prompts/create-mockup.md](prompts/create-mockup.md) as the starting prompt.
 
-export default function App() {
-  return (
-    <div className="p-8">
-      <h1 className="text-xl font-bold">Onboarding</h1>
-      <Button>Get started</Button>
-    </div>
-  )
-}
-```
-
-### 4. Preview it
+### 4. Preview the mockup
 
 ```bash
 npm run dev onboarding-flow
 ```
 
-The script symlinks your flow into the Vite preview engine and starts the dev server.
+The preview script links the selected mockup into the Vite preview app and starts a local dev server.
+
+## Rules
+
+- One repo per client.
+- One folder per mockup.
+- Use the client's design-system components whenever possible.
+- Use local mock data only.
+- Do not add API calls, auth flows, product state machines, or business logic.
+- Treat `client-design-system/` as copied client code, not the place to design the mockup.
 
 ## Folder Structure
 
-- `client-design-system/` — Copied from the client. **Read-only.** Stubs are auto-generated for broken imports.
-- `mockups/` — One folder per flow. AI-generated or hand-written.
-- `shared/preview-template/` — Vite + React + Tailwind engine.
-- `scripts/preview.js` — Links a mockup into the preview engine and starts Vite.
-- `scripts/import-design-system.js` — Imports and sanitizes a client's component folder.
+- `client-design-system/` - copied client components and tokens.
+- `mockups/` - isolated frontend mockups.
+- `mockups/fintech-dashboard/` - flagship compact example.
+- `prompts/` - reusable AI prompts for agencies.
+- `scripts/new-flow.js` - creates a new mockup folder.
+- `scripts/preview.js` - runs a selected mockup.
+- `scripts/import-design-system.js` - imports and sanitizes client components.
+- `shared/preview-template/` - Vite + React + Tailwind preview engine.
 
-## Using with an AI Agent
+## Handing Off
 
-Tell your agent:
+The deliverable is usually just:
 
-> "Import the design system from `/path/to/client/src` and create an onboarding flow in `mockups/onboarding-flow` using the Button and Input components."
+```text
+mockups/<flow-name>/
+```
 
-The agent should:
-1. Run `npm run import-design-system /path/to/client/src`
-2. Read the generated stubs to understand what's available
-3. Write the mockup in `mockups/onboarding-flow/src/App.tsx`
-4. Run `npm run dev onboarding-flow` to preview
+A developer can run it in this repo, inspect the composition in `src/App.tsx`, and move the useful pieces into the real product codebase.
