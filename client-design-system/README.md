@@ -1,22 +1,21 @@
 # Client Design System
 
-This folder contains the **read-only** copy of the client's React components and design tokens.
+This folder contains the client components available to mockups.
 
-## What to copy here
+For a starter repo, keep this flat and easy to scan:
 
-1. `components/` — The client's React component folder (e.g., `src/components/` or `packages/ui/src/components/`).
-2. `theme/` — Design tokens, CSS variables, font files, or Tailwind config extensions.
+```text
+components/
+├── Button.tsx
+├── Card.tsx
+├── Input.tsx
+└── index.ts
+```
 
-## What NOT to copy
-
-- API clients, auth logic, or data-fetching hooks.
-- Business-specific utilities.
-- Internal packages that are not UI-related.
-
-## Importing in mockups
-
-From any mockup file, import components using a relative path:
+Mockups should import from:
 
 ```tsx
-import { Button } from '../../client-design-system/components/Button'
+import { Button, Card, Input } from "client-design-system/components";
 ```
+
+Keep API clients, auth, product state machines, and route-level business logic out of this folder.

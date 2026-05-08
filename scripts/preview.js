@@ -2,7 +2,7 @@ const fs = require('fs');
 const path = require('path');
 const { execSync } = require('child_process');
 
-const mockupName = process.argv[2] || 'example-flow';
+const mockupName = process.argv[2] || 'profile-card';
 const root = path.resolve(__dirname, '..');
 const mockupSrc = path.join(root, 'mockups', mockupName, 'src');
 const linkTarget = path.join(root, 'shared/preview-template/src/mockup');

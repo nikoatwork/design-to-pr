@@ -3,7 +3,7 @@ const fs = require('fs');
 const path = require('path');
 
 const src = process.argv[2];
-const dest = path.resolve('client-design-system');
+const dest = path.resolve('client-design-system/components');
 
 if (!src) {
   console.error('Usage: node scripts/import-design-system.js <path-to-client-source>');
@@ -16,7 +16,7 @@ if (!fs.existsSync(srcResolved)) {
   process.exit(1);
 }
 
-console.log(`📦 Importing design system from:\n   ${srcResolved}`);
+console.log(`📦 Importing design-system components from:\n   ${srcResolved}`);
 
 if (fs.existsSync(dest)) {
   console.log(`   Removing existing ${path.relative(process.cwd(), dest)}`);
@@ -257,4 +257,4 @@ console.log('Next steps:');
 console.log('  1. Review stubbed imports above.');
 console.log('  2. Install any additional npm packages if needed.');
 console.log('  3. Import theme/tokens in shared/preview-template/src/index.css if required.');
-console.log('  4. Run: npm run dev example-flow');
+console.log('  4. Run: npm run dev profile-card');

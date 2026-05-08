@@ -29,17 +29,22 @@ fs.mkdirSync(srcDir, { recursive: true });
 
 fs.writeFileSync(
   appPath,
-  `export default function App() {
+  `import { Button, Card, CardContent } from "client-design-system/components";
+
+export default function App() {
   return (
     <div className="grid min-h-screen place-items-center bg-background-50 p-6 text-text-50">
-      <main className="w-full max-w-3xl rounded-lg border border-background-200 bg-white p-8 shadow-sm">
-        <p className="text-sm font-semibold uppercase text-primary-600">${flowName}</p>
-        <h1 className="mt-3 text-3xl font-bold">New mockup</h1>
-        <p className="mt-3 max-w-xl text-text-100">
-          Replace this starter screen with a focused composition using the
-          client's design-system components.
-        </p>
-      </main>
+      <Card className="w-full max-w-2xl">
+        <CardContent className="p-8">
+          <p className="text-sm font-semibold uppercase text-primary-600">${flowName}</p>
+          <h1 className="mt-3 text-3xl font-bold">New mockup</h1>
+          <p className="mt-3 max-w-xl text-text-100">
+            Replace this starter screen with a focused composition using the
+            client's design-system components.
+          </p>
+          <Button className="mt-6">Primary action</Button>
+        </CardContent>
+      </Card>
     </div>
   );
 }
