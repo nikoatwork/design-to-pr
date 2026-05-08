@@ -17,7 +17,7 @@ mockups/<flow-name>/
 - Do not add API calls.
 - Do not add auth logic.
 - Do not add product routing or business state machines.
-- Keep the mockup runnable with `npm run dev <flow-name>`.
+- Keep the mockup runnable through the existing preview script.
 - Prefer a focused, polished card or single screen over a large app-like page.
 
 ## Expected Work
@@ -25,5 +25,5 @@ mockups/<flow-name>/
 1. Read the available client components in `client-design-system/components/`.
 2. Create or update `mockups/<flow-name>/src/App.tsx`.
 3. Keep supporting files inside `mockups/<flow-name>/`.
-4. Run `npm run dev <flow-name>` or `npm run build` to verify.
+4. Run the preview or build command to verify.
 5. Summarize what changed and how to preview it.

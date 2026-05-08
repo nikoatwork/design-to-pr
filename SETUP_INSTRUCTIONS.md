@@ -6,7 +6,7 @@ Use this file as the setup prompt for a new client copy of the repo.
 
 Personalize this starter repo so designers can create simple runnable mockups with the client's real frontend components.
 
-Keep the result simple. A non-technical designer should be able to open the README, understand the folders, and run the example mockup.
+Keep the result simple. A non-technical designer should be able to open the README, understand the folders, and ask an AI coding agent to show the example mockup.
 
 ## Ask These Questions First
 
@@ -38,7 +38,7 @@ import { Button, Card, Input } from "client-design-system/components";
 4. Update `shared/preview-template/tailwind.config.js` with the chosen colors.
 5. Add any required global CSS to `shared/preview-template/src/index.css`.
 6. Replace `mockups/profile-card/src/App.tsx` with a small example using the selected components.
-7. Run:
+7. Run the selected example for verification:
 
 ```bash
 npm run dev profile-card
@@ -59,7 +59,7 @@ npm run dev profile-card
 
 Make sure the README lists:
 
-- The mockup to run.
+- The example mockup to ask the agent to show.
 - The components available.
-- The one command designers should use for previewing.
+- The plain-language request designers should give the coding agent.
 - Any client-specific notes, in plain language.

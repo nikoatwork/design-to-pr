@@ -19,16 +19,11 @@ Most people only need to know two folders:
 
 ## Try The Example
 
-```bash
-npm install
-npm run dev
-```
+Open this repo in an AI coding agent such as Codex or Claude Code and ask it:
 
-That opens the default `profile-card` example. You can also run it directly:
+> Show me the `profile-card` mockup.
 
-```bash
-npm run dev profile-card
-```
+The agent will start the preview server and open the example for you.
 
 ## Set It Up For A Client
 
@@ -40,10 +35,9 @@ The agent should ask which components and colors to use, then personalize this s
 
 ## Create Another Mockup
 
-```bash
-npm run new-flow onboarding-card
-npm run dev onboarding-card
-```
+Ask your coding agent:
+
+> Create a small `onboarding-card` mockup using the available client components, then preview it.
 
 Keep mockups small. A profile card, onboarding card, checkout card, pricing card, or settings card is usually better than a whole fake app.
 
