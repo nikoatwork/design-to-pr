@@ -110,10 +110,17 @@ Use `catalog.json` for labels, descriptions, variants, states, usage guidance, a
 
 ## Planning Links
 
-Repo agent instructions:
+Repo agent map:
 
 ```text
 AGENTS.md
+```
+
+Repo setup instructions and glossary:
+
+```text
+docs/SETUP_INSTRUCTIONS.md
+docs/glossary.md
 ```
 
 Current implementation task list:

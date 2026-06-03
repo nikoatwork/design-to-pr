@@ -56,6 +56,8 @@ Examples:
 
 ## Repo Usage Guides
 
+- [Setup instructions](SETUP_INSTRUCTIONS.md)
+- [Glossary](glossary.md)
 - [Repository architecture](repository-architecture.md)
 - [Agent workflow](agent-workflow.md)
 - [Designer workflow](designer-workflow.md)
@@ -65,7 +67,8 @@ Examples:
 ```text
 AGENTS.md                                      Agent rules for the whole repo
 README.md                                      Human-facing project overview
-SETUP_INSTRUCTIONS.md                         New-client setup prompt
+docs/SETUP_INSTRUCTIONS.md                    First-time guided setup prompt
+docs/glossary.md                               Shared repo terms
 client-design-system/README.md                Client design-system folder overview
 client-design-system/style-guide.md           Agent-facing design instructions
 client-design-system/catalog.json             Structured metadata

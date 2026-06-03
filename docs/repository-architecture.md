@@ -10,6 +10,9 @@ design-to-pr/
 ├── AGENTS.md
 ├── package.json
 ├── docs/
+│   ├── README.md
+│   ├── SETUP_INSTRUCTIONS.md
+│   ├── glossary.md
 │   └── ...repo usage docs only
 ├── app/
 │   └── ...localhost Gallery app

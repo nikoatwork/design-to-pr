@@ -1,74 +1,60 @@
-# Agent Instructions
+# Agent Map
 
-This repo is a one-client design-system workspace. It exists so designers and coding agents can inspect a client design system visually, create small React/TSX mockups, and adjust the design system without touching the client's production app.
+This repo is a one-client design-system workspace. Use this file as a map, then follow the linked docs.
 
-## Two Documentation Planes
+## First-Time Setup
 
-There are two separate planes. Keep them separate.
+If a user is installing or personalizing this repo for the first time, start here:
+
+```text
+docs/SETUP_INSTRUCTIONS.md
+```
+
+That file is the guided onboarding flow for getting a non-technical designer to a populated localhost Gallery.
+
+## Two Planes
+
+Keep these separate:
 
 ```text
 docs/                   Meta documentation about how to use this repository
-client-design-system/   The actual client design-system instantiation
+client-design-system/   Everything about the client's design-system instantiation
 ```
 
-### `docs/`: repo usage only
+All client-specific design work belongs in `client-design-system/`.
 
-Use `docs/` for instructions about this starter repo, workflow, setup, and how designers/agents should operate the project.
+## Where To Look
 
-Do not put client-specific component guidance, brand decisions, reusable component documentation, mockup content, or theme instructions in `docs/`.
+### Repo usage
 
-### `client-design-system/`: client design system only
+- `docs/README.md` - Repo documentation index.
+- `docs/SETUP_INSTRUCTIONS.md` - First-time guided setup.
+- `docs/glossary.md` - Shared terms: Gallery, Mockup, Component page, reusable item.
+- `docs/repository-architecture.md` - Visual architecture and source-of-truth model.
+- `docs/agent-workflow.md` - Agent workflow for normal work.
+- `docs/designer-workflow.md` - Designer workflow for using the Gallery.
 
-Everything pertaining to the client design system belongs in `client-design-system/`, including:
+### Client design system
 
-```text
-client-design-system/
-├── README.md           Overview of the client design-system folder
-├── style-guide.md      Agent-facing design instructions and project context
-├── catalog.json        Structured metadata for Gallery, components, and mockups
-├── theme/              Tokens, CSS, Tailwind config, fonts, and visual foundations
-├── components/         Reusable design-system components
-└── mockups/            One-off React/TSX mockups
-```
+- `client-design-system/README.md` - Client design-system folder overview.
+- `client-design-system/style-guide.md` - Agent-facing design instructions.
+- `client-design-system/catalog.json` - Structured metadata for Gallery, components, and mockups.
+- `client-design-system/theme/` - Tokens, CSS, fonts, and visual foundations.
+- `client-design-system/components/` - Reusable components.
+- `client-design-system/mockups/` - One-off React/TSX mockups.
 
-When changing the client design system, work inside `client-design-system/` unless repo tooling itself must change.
+### Localhost Gallery app
 
-## Product Model
+- `app/src/App.tsx` - Gallery shell, routes, and pages.
+- `app/src/discovery.ts` - Filesystem discovery and metadata mapping.
+- `app/src/examples.tsx` - Starter component examples.
+- `scripts/snapshot.js` - Screenshot capture.
 
-- **Gallery:** The localhost design-system home at `/`. Designers use it as the visual interface for understanding the current design-system state.
-- **Component page:** A route such as `/component/button` for a reusable item from `client-design-system/components/`.
-- **Mockup:** A one-off design instantiation from `client-design-system/mockups/`, routed as `/mockup/:slug`.
-- **Reusable item:** A component or pattern intended to be reused across mockups.
-- **One-off mockup:** A disposable design exploration or example using local data only.
+Only edit `app/` or `scripts/` when changing repo tooling or the Gallery interface itself.
 
-## Localhost App Expectations
+## Hard Rules
 
-`npm run dev` should open the Gallery by default. Users should navigate from the Gallery to component pages and mockup pages. Do not require designers to run separate commands for individual mockups.
-
-Mockups should render inside the Gallery app shell so designers keep sidebar/navigation context. Use a standardized viewing environment so mockups and components are easy to compare over time.
-
-## Agent Workflow
-
-Before creating or changing mockups:
-
-1. Read `client-design-system/style-guide.md`.
-2. Read `client-design-system/catalog.json`.
-3. Inspect relevant files in `client-design-system/components/` and `client-design-system/theme/`.
-4. Create or edit mockups under `client-design-system/mockups/`.
-5. Use local mock data only. Do not add APIs, auth, production routing, or client app state machines.
-
-## Current Planning Context
-
-The current simplification plan is tracked in:
-
-```text
-tasks/todo/tasks-repository-simplification-gallery.md
-```
-
-Important decisions from that plan:
-
-- One repo serves one client design system.
-- The Gallery is designer-facing and visual.
-- `client-design-system/style-guide.md` is mostly agent-facing and read-only for designers.
-- Routes are discovered from filesystem structure; metadata comes from `catalog.json`.
-- First implementation supports React/TSX mockups only.
+- `npm run dev` opens the Gallery by default.
+- Do not require separate commands for individual mockups.
+- Keep client work inside `client-design-system/` unless tooling changes are required.
+- Use local mock data only. Do not add APIs, auth, production routing, or client app business logic.

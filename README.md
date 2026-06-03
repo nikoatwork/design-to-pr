@@ -102,7 +102,7 @@ Do not add API calls, auth, production routing, or client app business logic.
 
 ## Setup For A Client
 
-Give [`SETUP_INSTRUCTIONS.md`](SETUP_INSTRUCTIONS.md) to an AI coding agent and say:
+Give [`docs/SETUP_INSTRUCTIONS.md`](docs/SETUP_INSTRUCTIONS.md) to an AI coding agent and say:
 
 > Help me set this up for this client.
 
