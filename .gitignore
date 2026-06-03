@@ -1,4 +1,5 @@
 node_modules
 dist
+app/dist
+screenshots
 *.local
-shared/preview-template/src/mockup

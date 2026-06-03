@@ -122,9 +122,3 @@ Repo setup instructions and glossary:
 docs/SETUP_INSTRUCTIONS.md
 docs/glossary.md
 ```
-
-Current implementation task list:
-
-```text
-tasks/todo/tasks-repository-simplification-gallery.md
-```

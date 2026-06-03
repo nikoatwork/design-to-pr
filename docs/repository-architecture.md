@@ -23,8 +23,7 @@ design-to-pr/
 │   ├── theme/
 │   ├── components/
 │   └── mockups/
-├── scripts/
-└── tasks/
+└── scripts/
 ```
 
 ## Runtime Shape
