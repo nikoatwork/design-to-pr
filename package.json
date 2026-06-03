@@ -7,12 +7,18 @@
   ],
   "scripts": {
     "dev": "node scripts/preview.js",
+    "gallery": "node scripts/preview.js design-system-gallery",
     "import-design-system": "node scripts/import-design-system.js",
-    "new-flow": "node scripts/new-flow.js"
+    "new-flow": "node scripts/new-flow.js",
+    "snapshot": "node scripts/snapshot.js",
+    "snapshot:gallery": "node scripts/snapshot.js design-system-gallery"
   },
   "dependencies": {
     "class-variance-authority": "^0.7.1",
     "lucide-react": "^1.14.0",
     "tailwind-merge": "^3.5.0"
+  },
+  "devDependencies": {
+    "playwright": "^1.60.0"
   }
 }

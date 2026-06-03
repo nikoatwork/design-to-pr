@@ -17,9 +17,37 @@ Most people only need to know two folders:
 - `client-design-system/components/` contains the components available to use.
 - `mockups/` contains the mockups you can run and edit.
 
-## Try The Example
+## See The Design System
 
 Open this repo in an AI coding agent such as Codex or Claude Code and ask it:
+
+> Show me the design system gallery.
+
+The agent should run:
+
+```bash
+npm run gallery
+```
+
+This opens a Braid-inspired overview and visual inventory of components, foundations, states, and small patterns. The starter repo includes sample components so the gallery works immediately.
+
+For the plain-language design-system docs, start at `docs/design-system/README.md`.
+
+To save screenshots for review, ask:
+
+> Take screenshots of the design system gallery.
+
+The agent should run:
+
+```bash
+npm run snapshot:gallery
+```
+
+Screenshots are saved to `screenshots/design-system-gallery/`. If Playwright asks for a browser the first time, run `npx playwright install chromium` once.
+
+## Try The Example
+
+Ask your agent:
 
 > Show me the `profile-card` mockup.
 
@@ -52,15 +80,19 @@ Keep mockups small. A profile card, onboarding card, checkout card, pricing card
 
 ## Available Sample Components
 
-The starter repo includes a tiny fake design system:
+The starter repo includes a tiny fake design system so designers can see the gallery before any client components are imported:
 
 - `Avatar`
+- `AvatarGroup`
 - `Badge`
 - `Button`
 - `Card`
+- `CardHeader`
+- `CardContent`
+- `IconButton`
 - `Input`
 - `Progress`
 - `Switch`
 - `Tabs`
 
-These are placeholders for the client's real components.
+These are placeholders for the client's real components. The component catalog is in `client-design-system/catalog.json`, and the plain-language docs start at `docs/design-system/README.md`.

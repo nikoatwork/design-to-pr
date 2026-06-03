@@ -1,0 +1,84 @@
+{
+  "name": "Starter design system",
+  "audience": "Non-technical designers working with an AI coding agent",
+  "howToPreview": "Ask the agent: Show me the design system gallery. It should run npm run gallery.",
+  "foundations": {
+    "colors": [
+      { "token": "primary", "use": "Main actions, focus rings, informative emphasis" },
+      { "token": "background", "use": "Page backgrounds, panels, dividers, quiet grouped areas" },
+      { "token": "text", "use": "Headings, body copy, secondary labels" }
+    ],
+    "shape": "Rounded corners are soft and practical. Cards and controls use rounded-lg by default.",
+    "density": "Comfortable spacing for review-friendly mockups rather than dense production screens."
+  },
+  "components": [
+    {
+      "name": "Avatar",
+      "file": "client-design-system/components/Avatar.tsx",
+      "useWhen": "Showing a person, owner, reviewer, teammate, or collaborator.",
+      "variants": ["xs", "sm", "md", "lg", "xl", "xxl"],
+      "states": ["none", "online", "offline", "busy"],
+      "designerPrompt": "Use avatars to show who owns or reviews this item. Use initials if no photo is available."
+    },
+    {
+      "name": "Badge",
+      "file": "client-design-system/components/Badge.tsx",
+      "useWhen": "Showing compact status, category, priority, or confidence.",
+      "variants": ["neutral", "success", "warning", "danger", "info"],
+      "designerPrompt": "Add a badge for the item's status, but keep the text short."
+    },
+    {
+      "name": "Button",
+      "file": "client-design-system/components/Button.tsx",
+      "useWhen": "Letting someone take an action.",
+      "variants": ["primary", "secondary", "ghost", "accent"],
+      "sizes": ["sm", "md", "lg"],
+      "designerPrompt": "Use one primary button for the main action. Use secondary buttons for alternatives."
+    },
+    {
+      "name": "Card",
+      "file": "client-design-system/components/Card.tsx",
+      "useWhen": "Grouping a focused piece of content or a small workflow.",
+      "parts": ["Card", "CardHeader", "CardContent"],
+      "designerPrompt": "Use a card for one coherent object, not for every row on the page."
+    },
+    {
+      "name": "Input",
+      "file": "client-design-system/components/Input.tsx",
+      "useWhen": "Capturing short text, names, emails, labels, and search-like input.",
+      "states": ["default", "focus", "disabled via native props"],
+      "designerPrompt": "Keep labels visible. Use placeholders as examples, not instructions."
+    },
+    {
+      "name": "Progress",
+      "file": "client-design-system/components/Progress.tsx",
+      "useWhen": "Showing completion percentage for setup, onboarding, upload, or review readiness.",
+      "designerPrompt": "Use progress when the amount complete is meaningful. Add a short label beside it."
+    },
+    {
+      "name": "Switch",
+      "file": "client-design-system/components/Switch.tsx",
+      "useWhen": "Turning a setting on or off.",
+      "states": ["checked", "unchecked"],
+      "designerPrompt": "Use switches for immediate settings, not one-time actions."
+    },
+    {
+      "name": "Tabs",
+      "file": "client-design-system/components/Tabs.tsx",
+      "useWhen": "Switching between a few sibling views in the same area.",
+      "designerPrompt": "Use tabs only when each view is equally important and closely related."
+    },
+    {
+      "name": "IconButton",
+      "file": "client-design-system/components/Tabs.tsx",
+      "useWhen": "Compact secondary actions such as settings, copy, more, or close.",
+      "designerPrompt": "Use icon buttons sparingly and give them accessible labels."
+    }
+  ],
+  "starterRequestsForAgents": [
+    "Show me the design system gallery.",
+    "Create a small onboarding card using Button, Card, Badge, Input, Progress, and Switch.",
+    "Take screenshots of the design system gallery.",
+    "Make this mockup feel calmer while still using the client design system."
+  ]
+}
