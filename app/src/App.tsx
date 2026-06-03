@@ -244,14 +244,14 @@ function GalleryPage({ navigate }: { navigate: (href: string) => void }) {
         <MetricCard icon={<BookOpen className="size-5" />} label="Guidance source" value="style-guide.md" />
       </div>
 
-      <section className="mt-8 grid gap-6 xl:grid-cols-[1.2fr_0.8fr]">
+      <section className="mt-8 grid min-w-0 items-start gap-6 xl:grid-cols-[minmax(0,1fr)_minmax(0,1fr)]">
         <Panel title="Foundations" icon={<SwatchBook className="size-5" />}>
           {colorTokens.length > 0 ? (
-            <div className="grid gap-3 sm:grid-cols-3">
+            <div className="grid grid-cols-[repeat(auto-fit,minmax(10rem,1fr))] gap-3">
               {colorTokens.map((color) => (
-                <div key={color.token} className="rounded-xl border border-background-200 bg-white p-4">
+                <div key={color.token} className="min-w-0 rounded-xl border border-background-200 bg-white p-4">
                   <div className="mb-4 h-16 rounded-lg bg-background-100 ring-1 ring-background-200" />
-                  <p className="font-mono text-sm font-bold text-text-50">{color.token}</p>
+                  <p className="truncate font-mono text-sm font-bold text-text-50">{color.token}</p>
                   <p className="mt-1 text-sm leading-6 text-text-100">{color.use}</p>
                 </div>
               ))}
@@ -259,7 +259,7 @@ function GalleryPage({ navigate }: { navigate: (href: string) => void }) {
           ) : (
             <EmptyState title="No foundation metadata yet" body="Add color, shape, and density notes to client-design-system/catalog.json." />
           )}
-          <div className="mt-4 grid gap-3 md:grid-cols-2">
+          <div className="mt-4 grid grid-cols-[repeat(auto-fit,minmax(14rem,1fr))] gap-3">
             <InfoLine label="Shape" value={catalog.foundations?.shape || "No shape guidance yet."} />
             <InfoLine label="Density" value={catalog.foundations?.density || "No density guidance yet."} />
           </div>
@@ -269,7 +269,7 @@ function GalleryPage({ navigate }: { navigate: (href: string) => void }) {
           <p className="text-sm leading-6 text-text-100">
             The style guide is mostly agent-facing and read-only for designers. It is rendered here for transparency. Repo-level usage docs live in docs/README.md, docs/agent-workflow.md, and docs/designer-workflow.md.
           </p>
-          <pre className="mt-4 max-h-56 overflow-auto rounded-xl bg-text-50 p-4 text-xs leading-5 text-white"><code>{styleGuide.slice(0, 1400)}{styleGuide.length > 1400 ? "\n…" : ""}</code></pre>
+          <pre className="mt-4 max-h-56 w-full max-w-full overflow-auto rounded-xl bg-text-50 p-4 text-xs leading-5 text-white"><code>{styleGuide.slice(0, 1400)}{styleGuide.length > 1400 ? "\n…" : ""}</code></pre>
           <Link href="/style-guide" navigate={navigate} className="mt-4 inline-flex items-center gap-2 rounded-lg bg-text-50 px-4 py-2 text-sm font-bold text-white hover:bg-slate-800">
             Open style guide <ArrowRight className="size-4" />
           </Link>
@@ -339,7 +339,7 @@ function MetricCard({ icon, label, value }: { icon: ReactNode; label: string; va
 
 function Panel({ title, icon, children, className = "" }: { title: string; icon: ReactNode; children: ReactNode; className?: string }) {
   return (
-    <section className={`rounded-2xl border border-background-200 bg-white p-5 shadow-sm ${className}`}>
+    <section className={`min-w-0 rounded-2xl border border-background-200 bg-white p-5 shadow-sm ${className}`}>
       <div className="mb-5 flex items-center gap-3">
         <div className="grid size-10 place-items-center rounded-xl bg-background-50 text-primary-700">{icon}</div>
         <h2 className="text-xl font-black tracking-tight text-text-50">{title}</h2>
