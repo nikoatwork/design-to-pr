@@ -1,7 +1,7 @@
 {
   "name": "Starter design system",
   "audience": "Non-technical designers working with an AI coding agent",
-  "howToPreview": "Ask the agent: Show me the design system gallery. It should run npm run gallery.",
+  "howToPreview": "Ask the agent: Run the design system Gallery. It should run npm run dev.",
   "foundations": {
     "colors": [
       { "token": "primary", "use": "Main actions, focus rings, informative emphasis" },
@@ -75,10 +75,18 @@
       "designerPrompt": "Use icon buttons sparingly and give them accessible labels."
     }
   ],
+  "mockups": [
+    {
+      "name": "Profile Card",
+      "slug": "profile-card",
+      "path": "client-design-system/mockups/profile-card",
+      "purpose": "Starter one-off mockup showing a focused composition with sample component states."
+    }
+  ],
   "starterRequestsForAgents": [
-    "Show me the design system gallery.",
+    "Run the design system Gallery.",
     "Create a small onboarding card using Button, Card, Badge, Input, Progress, and Switch.",
-    "Take screenshots of the design system gallery.",
+    "Take screenshots of the Gallery.",
     "Make this mockup feel calmer while still using the client design system."
   ]
 }

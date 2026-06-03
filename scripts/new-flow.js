@@ -5,23 +5,23 @@ const path = require('path');
 const flowName = process.argv[2];
 
 if (!flowName) {
-  console.error('Usage: npm run new-flow <flow-name>');
+  console.error('Usage: npm run new-flow <mockup-name>');
   process.exit(1);
 }
 
 if (!/^[a-z0-9][a-z0-9-]*$/.test(flowName)) {
-  console.error('Flow name must use lowercase letters, numbers, and hyphens.');
+  console.error('Mockup name must use lowercase letters, numbers, and hyphens.');
   process.exit(1);
 }
 
 const root = path.resolve(__dirname, '..');
-const flowDir = path.join(root, 'mockups', flowName);
-const srcDir = path.join(flowDir, 'src');
+const mockupDir = path.join(root, 'client-design-system', 'mockups', flowName);
+const srcDir = path.join(mockupDir, 'src');
 const appPath = path.join(srcDir, 'App.tsx');
-const readmePath = path.join(flowDir, 'README.md');
+const readmePath = path.join(mockupDir, 'README.md');
 
-if (fs.existsSync(flowDir)) {
-  console.error(`Mockup already exists: mockups/${flowName}`);
+if (fs.existsSync(mockupDir)) {
+  console.error(`Mockup already exists: client-design-system/mockups/${flowName}`);
   process.exit(1);
 }
 
@@ -33,7 +33,7 @@ fs.writeFileSync(
 
 export default function App() {
   return (
-    <div className="grid min-h-screen place-items-center bg-background-50 p-6 text-text-50">
+    <div className="grid min-h-[30rem] place-items-center bg-background-50 p-6 text-text-50">
       <Card className="w-full max-w-2xl">
         <CardContent className="p-8">
           <p className="text-sm font-semibold uppercase text-primary-600">${flowName}</p>
@@ -56,14 +56,20 @@ fs.writeFileSync(
   readmePath,
   `# ${flowName}
 
-Run this mockup with:
+This one-off mockup lives in:
 
-\`\`\`bash
-npm run dev ${flowName}
+\`\`\`text
+client-design-system/mockups/${flowName}/
+\`\`\`
+
+After the Gallery routes are wired, it should be available at:
+
+\`\`\`text
+/mockup/${flowName}
 \`\`\`
 `,
   'utf-8'
 );
 
-console.log(`Created mockup: mockups/${flowName}`);
-console.log(`Run it with: npm run dev ${flowName}`);
+console.log(`Created mockup: client-design-system/mockups/${flowName}`);
+console.log(`Open the Gallery with: npm run dev`);

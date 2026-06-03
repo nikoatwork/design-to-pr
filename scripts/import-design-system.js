@@ -256,5 +256,5 @@ if (foundDeps.size > 0) {
 console.log('Next steps:');
 console.log('  1. Review stubbed imports above.');
 console.log('  2. Install any additional npm packages if needed.');
-console.log('  3. Import theme/tokens in shared/preview-template/src/index.css if required.');
-console.log('  4. Run: npm run dev profile-card');
+console.log('  3. Import theme/tokens in app/src/index.css or client-design-system/theme/ if required.');
+console.log('  4. Run: npm run dev and review the Gallery.');

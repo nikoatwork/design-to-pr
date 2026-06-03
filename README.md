@@ -1,98 +1,113 @@
 # Design-to-PR
 
-A small starter repo for making frontend mockups with a client's real design-system components.
+A starter repo for giving design agencies and AI coding agents a safe, visual workspace for one client's design system.
 
-This is meant to be copied once per client. Designers and AI agents can create realistic UI examples without touching the client's app, APIs, auth, or business logic.
+The repo has one job: help people inspect a client design system, create small React/TSX mockups, and review design-system changes without touching the client's production app, APIs, auth, or business logic.
 
-## The Idea
+## Start Here
+
+```bash
+npm install
+npm run dev
+```
+
+`npm run dev` should open the local design-system **Gallery** at `localhost:5173`.
+
+The Gallery is the designer-facing visual interface for:
+
+- seeing the current design-system state
+- browsing reusable components
+- opening one-off mockups
+- understanding where design-system work should happen
+
+## Repository Architecture
+
+There are two documentation planes:
 
 ```text
-client-design-system/components/  -> the client's reusable UI pieces
-mockups/profile-card/             -> one runnable example mockup
-shared/preview-template/          -> preview plumbing
+docs/                   Meta documentation about how to use this repository
+client-design-system/   Everything about this client's design-system instantiation
 ```
 
-Most people only need to know two folders:
+### `docs/`
 
-- `client-design-system/components/` contains the components available to use.
-- `mockups/` contains the mockups you can run and edit.
+Use `docs/` for repo-level guidance: how to work in this starter, how agents should operate, and how design agencies should use the localhost Gallery.
 
-## See The Design System
+### `client-design-system/`
 
-Open this repo in an AI coding agent such as Codex or Claude Code and ask it:
+Use `client-design-system/` for the actual client design system:
 
-> Show me the design system gallery.
-
-The agent should run:
-
-```bash
-npm run gallery
+```text
+client-design-system/
+├── README.md           Folder overview
+├── style-guide.md      Agent-facing design instructions and context
+├── catalog.json        Structured component/mockup metadata
+├── theme/              Tokens, CSS, fonts, Tailwind config, visual foundations
+├── components/         Reusable design-system components
+└── mockups/            One-off React/TSX design mockups
 ```
 
-This opens a Braid-inspired overview and visual inventory of components, foundations, states, and small patterns. The starter repo includes sample components so the gallery works immediately.
+Agents and designers should treat `client-design-system/` as the encapsulated client-specific workspace.
 
-For the plain-language design-system docs, start at `docs/design-system/README.md`.
+## Core Terms
 
-To save screenshots for review, ask:
+- **Gallery:** The localhost design-system home at `/`.
+- **Component page:** A page like `/component/button` for a reusable item.
+- **Mockup:** A one-off design instantiation like `/mockup/profile-card`.
+- **Reusable item:** A component or pattern intended to be used across mockups.
+- **One-off mockup:** A disposable design exploration using local data only.
 
-> Take screenshots of the design system gallery.
-
-The agent should run:
-
-```bash
-npm run snapshot:gallery
-```
-
-Screenshots are saved to `screenshots/design-system-gallery/`. If Playwright asks for a browser the first time, run `npx playwright install chromium` once.
-
-## Try The Example
-
-Ask your agent:
-
-> Show me the `profile-card` mockup.
-
-The agent will start the preview server and open the example for you.
-
-## Set It Up For A Client
-
-Give [SETUP_INSTRUCTIONS.md](SETUP_INSTRUCTIONS.md) to an AI agent and say:
-
-> Help me set this up for this client.
-
-The agent should ask which components and colors to use, then personalize this starter repo by replacing the sample components, theme settings, and example mockup.
-
-## Create Another Mockup
+## For Designers
 
 Ask your coding agent:
 
-> Create a small `onboarding-card` mockup using the available client components, then preview it.
+> Run the design system Gallery.
 
-Keep mockups small. A profile card, onboarding card, checkout card, pricing card, or settings card is usually better than a whole fake app.
+The agent should run:
 
-## Rules
+```bash
+npm run dev
+```
 
-- Use one repo per client.
-- Keep `client-design-system/components/` flat and easy to scan.
-- Use local mock data only.
-- Do not add API calls, auth, routing architecture, or product business logic.
-- Prefer one polished card or screen over a large demo.
-- If setup gets confusing, simplify the component list before adding more structure.
+Then use the sidebar to browse:
 
-## Available Sample Components
+- Gallery overview
+- reusable components
+- one-off mockups
 
-The starter repo includes a tiny fake design system so designers can see the gallery before any client components are imported:
+The only client-specific text document designers may need to review is:
 
-- `Avatar`
-- `AvatarGroup`
-- `Badge`
-- `Button`
-- `Card`
-- `CardHeader`
-- `CardContent`
-- `IconButton`
-- `Input`
-- `Progress`
-- `Switch`
-- `Tabs`
+```text
+client-design-system/style-guide.md
+```
 
-These are placeholders for the client's real components. The component catalog is in `client-design-system/catalog.json`, and the plain-language docs start at `docs/design-system/README.md`.
+It is mostly agent-facing and read-only for designers, but it should transparently reflect current design-system instructions.
+
+## For Coding Agents
+
+Read these first:
+
+1. [`AGENTS.md`](AGENTS.md)
+2. [`client-design-system/style-guide.md`](client-design-system/style-guide.md)
+3. [`client-design-system/catalog.json`](client-design-system/catalog.json)
+4. Relevant files in `client-design-system/components/` and `client-design-system/theme/`
+
+When creating new work, add one-off React/TSX mockups under:
+
+```text
+client-design-system/mockups/<mockup-name>/
+```
+
+Do not add API calls, auth, production routing, or client app business logic.
+
+## Setup For A Client
+
+Give [`SETUP_INSTRUCTIONS.md`](SETUP_INSTRUCTIONS.md) to an AI coding agent and say:
+
+> Help me set this up for this client.
+
+The agent should replace starter components, theme files, catalog metadata, style-guide guidance, and starter mockups inside `client-design-system/`.
+
+## More Repo Documentation
+
+See [`docs/README.md`](docs/README.md) for repo-level usage documentation.

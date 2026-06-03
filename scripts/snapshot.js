@@ -3,29 +3,62 @@ const fs = require('fs');
 const path = require('path');
 const { spawn } = require('child_process');
 
-const mockupName = process.argv[2] || 'design-system-gallery';
 const root = path.resolve(__dirname, '..');
-const previewRoot = path.join(root, 'shared/preview-template');
-const mockupSrc = path.join(root, 'mockups', mockupName, 'src');
-const linkTarget = path.join(previewRoot, 'src/mockup');
-const screenshotsDir = path.join(root, 'screenshots', mockupName);
+const screenshotsDir = path.join(root, 'screenshots', 'gallery');
 const port = Number(process.env.PORT || 5174);
-const url = `http://127.0.0.1:${port}`;
+const baseUrl = `http://127.0.0.1:${port}`;
 
-function linkMockup() {
-  if (!fs.existsSync(mockupSrc)) {
-    console.error(`❌ Mockup not found: ${mockupSrc}`);
-    process.exit(1);
+function slugify(value) {
+  return value
+    .replace(/([a-z0-9])([A-Z])/g, '$1-$2')
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/(^-|-$)/g, '');
+}
+
+function readCatalog() {
+  const catalogPath = path.join(root, 'client-design-system', 'catalog.json');
+  try {
+    return JSON.parse(fs.readFileSync(catalogPath, 'utf-8'));
+  } catch {
+    return {};
+  }
+}
+
+function discoverRoutes() {
+  const catalog = readCatalog();
+  const routeSet = new Set(['/', '/style-guide']);
+
+  const componentsDir = path.join(root, 'client-design-system', 'components');
+  if (fs.existsSync(componentsDir)) {
+    for (const file of fs.readdirSync(componentsDir)) {
+      if (file.endsWith('.tsx') && file !== 'index.tsx') {
+        routeSet.add(`/component/${slugify(file.replace(/\.tsx$/, ''))}`);
+      }
+    }
   }
 
-  if (fs.existsSync(linkTarget)) {
-    fs.rmSync(linkTarget, { recursive: true, force: true });
+  for (const component of catalog.components || []) {
+    if (component.name) routeSet.add(`/component/${slugify(component.name)}`);
   }
 
-  fs.mkdirSync(path.dirname(linkTarget), { recursive: true });
-  const relativePath = path.relative(path.dirname(linkTarget), mockupSrc);
-  const symlinkType = process.platform === 'win32' ? 'junction' : 'dir';
-  fs.symlinkSync(relativePath, linkTarget, symlinkType);
+  const mockupsDir = path.join(root, 'client-design-system', 'mockups');
+  if (fs.existsSync(mockupsDir)) {
+    for (const entry of fs.readdirSync(mockupsDir, { withFileTypes: true })) {
+      if (entry.isDirectory()) routeSet.add(`/mockup/${entry.name}`);
+    }
+  }
+
+  for (const mockup of catalog.mockups || []) {
+    if (mockup.slug || mockup.name) routeSet.add(`/mockup/${mockup.slug || slugify(mockup.name)}`);
+  }
+
+  return [...routeSet];
+}
+
+function fileNameForRoute(route, viewportName) {
+  const slug = route === '/' ? 'gallery' : route.replace(/^\//, '').replace(/\//g, '-');
+  return `${slug}-${viewportName}.png`;
 }
 
 function waitForServer(targetUrl, timeoutMs = 30000) {
@@ -63,11 +96,10 @@ async function loadPlaywright() {
 }
 
 async function main() {
-  linkMockup();
   fs.mkdirSync(screenshotsDir, { recursive: true });
 
-  const vite = spawn('npx', ['vite', '--host', '127.0.0.1', '--port', String(port)], {
-    cwd: previewRoot,
+  const vite = spawn('npx', ['vite', '--host', '127.0.0.1', '--port', String(port), '--config', 'app/vite.config.ts'], {
+    cwd: root,
     stdio: ['ignore', 'pipe', 'pipe'],
     shell: process.platform === 'win32'
   });
@@ -76,26 +108,29 @@ async function main() {
   vite.stderr.on('data', (chunk) => process.stderr.write(chunk));
 
   try {
-    await waitForServer(url);
+    await waitForServer(baseUrl);
     const { chromium } = await loadPlaywright();
     const browser = await chromium.launch();
 
+    const routes = discoverRoutes();
     const shots = [
-      { name: 'desktop', viewport: { width: 1440, height: 1400 }, fullPage: true },
-      { name: 'mobile', viewport: { width: 390, height: 1200 }, fullPage: true }
+      { name: 'desktop', viewport: { width: 1440, height: 1200 }, fullPage: true },
+      { name: 'mobile', viewport: { width: 390, height: 900 }, fullPage: true }
     ];
 
-    for (const shot of shots) {
-      const page = await browser.newPage({ viewport: shot.viewport });
-      await page.goto(url, { waitUntil: 'networkidle' });
-      const filePath = path.join(screenshotsDir, `${shot.name}.png`);
-      await page.screenshot({ path: filePath, fullPage: shot.fullPage });
-      await page.close();
-      console.log(`📸 Saved ${path.relative(root, filePath)}`);
+    for (const route of routes) {
+      for (const shot of shots) {
+        const page = await browser.newPage({ viewport: shot.viewport });
+        await page.goto(`${baseUrl}${route}`, { waitUntil: 'networkidle' });
+        const filePath = path.join(screenshotsDir, fileNameForRoute(route, shot.name));
+        await page.screenshot({ path: filePath, fullPage: shot.fullPage });
+        await page.close();
+        console.log(`📸 Saved ${path.relative(root, filePath)}`);
+      }
     }
 
     await browser.close();
-    console.log(`✅ Screenshots complete for ${mockupName}`);
+    console.log(`✅ Screenshots complete for ${routes.length} Gallery route(s)`);
   } catch (error) {
     const message = error && error.message ? error.message : String(error);
     console.error(`❌ Snapshot failed: ${message}`);
