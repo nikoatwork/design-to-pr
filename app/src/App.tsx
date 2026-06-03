@@ -4,6 +4,7 @@ import {
   BookOpen,
   Box,
   CheckCircle2,
+  Copy,
   FileText,
   FolderKanban,
   Home,
@@ -83,6 +84,48 @@ function Link({ href, children, className, navigate }: { href: string; children:
 function slugForRoute(route: Route) {
   if (route.kind === "component" || route.kind === "mockup") return route.slug;
   return route.kind;
+}
+
+function getAgentInstruction(route: Route) {
+  if (route.kind === "gallery") {
+    return "We are working on the design system overview; update client-design-system/catalog.json and client-design-system/style-guide.md.";
+  }
+
+  if (route.kind === "style-guide") {
+    return "We are working on the design system style guide; edit client-design-system/style-guide.md.";
+  }
+
+  if (route.kind === "component") {
+    const component = findComponent(route.slug);
+    const name = component?.name || titleFromSlug(route.slug);
+    const file = component?.file || `client-design-system/components/${name.replace(/\s+/g, "")}.tsx`;
+    return `We are working on the reusable component ${name}; edit ${file}.`;
+  }
+
+  if (route.kind === "mockup") {
+    const mockup = findMockup(route.slug);
+    const name = mockup?.name || titleFromSlug(route.slug);
+    return `We are working on the mockup ${name}; edit client-design-system/mockups/${route.slug}/src/App.tsx.`;
+  }
+
+  return `We are working on the Gallery route ${route.path}; inspect app/src/App.tsx.`;
+}
+
+async function copyTextToClipboard(text: string) {
+  if (navigator.clipboard?.writeText) {
+    await navigator.clipboard.writeText(text);
+    return;
+  }
+
+  const textarea = document.createElement("textarea");
+  textarea.value = text;
+  textarea.setAttribute("readonly", "");
+  textarea.style.position = "fixed";
+  textarea.style.opacity = "0";
+  document.body.appendChild(textarea);
+  textarea.select();
+  document.execCommand("copy");
+  document.body.removeChild(textarea);
 }
 
 function Sidebar({ route, navigate }: { route: Route; navigate: (href: string) => void }) {
@@ -169,13 +212,20 @@ function EmptyNavItem({ children }: { children: ReactNode }) {
   return <div className="rounded-lg px-3 py-2 text-sm font-semibold text-text-100">{children}</div>;
 }
 
-function TopBar({ route, navigate }: { route: Route; navigate: (href: string) => void }) {
+function TopBar({ route }: { route: Route }) {
+  const [copied, setCopied] = useState(false);
   const title =
     route.kind === "gallery" ? "Gallery" :
     route.kind === "style-guide" ? "Style guide" :
     route.kind === "component" ? `Component: ${titleFromSlug(route.slug)}` :
     route.kind === "mockup" ? `Mockup: ${titleFromSlug(route.slug)}` :
     "Not found";
+
+  async function handleCopy() {
+    await copyTextToClipboard(getAgentInstruction(route));
+    setCopied(true);
+    window.setTimeout(() => setCopied(false), 1600);
+  }
 
   return (
     <header className="sticky top-0 z-20 border-b border-background-200 bg-white/95 backdrop-blur">
@@ -190,10 +240,14 @@ function TopBar({ route, navigate }: { route: Route; navigate: (href: string) =>
           </div>
         </div>
 
-        <div className="hidden items-center gap-2 md:flex">
-          <Link href="/" navigate={navigate} className="rounded-lg px-3 py-2 text-sm font-semibold text-text-100 hover:bg-background-50">Gallery</Link>
-          <Link href="/style-guide" navigate={navigate} className="rounded-lg px-3 py-2 text-sm font-semibold text-text-100 hover:bg-background-50">Style guide</Link>
-        </div>
+        <button
+          className="inline-flex items-center gap-2 rounded-lg bg-text-50 px-3 py-2 text-sm font-bold text-white shadow-sm transition hover:bg-slate-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-text-50"
+          onClick={handleCopy}
+          type="button"
+        >
+          <Copy className="size-4" />
+          {copied ? "Copied" : "Copy agent instructions"}
+        </button>
       </div>
     </header>
   );
@@ -205,7 +259,7 @@ function AppShell({ children, route, navigate }: { children: ReactNode; route: R
       <div className="flex min-h-screen">
         <Sidebar route={route} navigate={navigate} />
         <div className="min-w-0 flex-1">
-          <TopBar route={route} navigate={navigate} />
+          <TopBar route={route} />
           {children}
         </div>
       </div>
