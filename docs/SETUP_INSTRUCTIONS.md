@@ -9,7 +9,7 @@ Get a non-technical designer to view the impressive and populated design-system 
 ## Ask the installing user These Questions First
 
 0. Welcome the Designer and explain that we'll get them a design system setup in minutes.
-1. Do you want to import styles and design guidelines from a company website? allow them to paste website and extract colors and shapes from them by browsing the website. This should populate our design sytem.
+1. Do you want to import styles and design guidelines from a company website? allow them to paste website and extract colors and shapes from them by browsing the website. Follow `docs/how-to-extract-design-from-url.md` so this populates our design sytem.
 2. Which components should the first example use? Pick 4-8 components maximum.
 3. What brand colors, fonts, or visual tokens should be added to `client-design-system/theme/` or the app CSS? (if 1 was answered with link, infer colors/fonts)
 4. Are there any required wrappers, fonts, or global CSS files needed to make the components look correct?
