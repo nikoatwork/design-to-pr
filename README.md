@@ -1,8 +1,25 @@
 # Design-to-PR
 
-A one-client design-system workspace for design agencies and AI coding agents.
+![Design-to-PR](docs/assets/design-to-pr.png)
 
-Run the local Gallery:
+Designers want to ship code. Designer want to collaborate with agents.
+Codified design systems are the answer.
+
+But it is hard to get started.
+
+This is a starter repository that sets up a React-based design system for you, without knowing how to code.
+
+You get a gallery to see and feel
+
+- style guide
+- components
+- mockups
+
+And you can create new components and mockups right in this repository.
+
+To install this repository, check the docs/SETUP_INSTRUCTIONS.md
+
+To Run the local Gallery:
 
 ```bash
 npm install
