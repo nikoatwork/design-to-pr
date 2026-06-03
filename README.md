@@ -1,113 +1,50 @@
 # Design-to-PR
 
-A starter repo for giving design agencies and AI coding agents a safe, visual workspace for one client's design system.
+A one-client design-system workspace for design agencies and AI coding agents.
 
-The repo has one job: help people inspect a client design system, create small React/TSX mockups, and review design-system changes without touching the client's production app, APIs, auth, or business logic.
-
-## Start Here
+Run the local Gallery:
 
 ```bash
 npm install
 npm run dev
 ```
 
-`npm run dev` should open the local design-system **Gallery** at `localhost:5173`.
+Then open `localhost:5173` to inspect the design system, component pages, mockups, and style guide.
 
-The Gallery is the designer-facing visual interface for:
+## First-Time Setup
 
-- seeing the current design-system state
-- browsing reusable components
-- opening one-off mockups
-- understanding where design-system work should happen
-
-## Repository Architecture
-
-There are two documentation planes:
+If you are setting this repo up for a client, give this to your coding agent:
 
 ```text
-docs/                   Meta documentation about how to use this repository
-client-design-system/   Everything about this client's design-system instantiation
+Help me set this up for this client. Follow docs/SETUP_INSTRUCTIONS.md.
 ```
 
-### `docs/`
-
-Use `docs/` for repo-level guidance: how to work in this starter, how agents should operate, and how design agencies should use the localhost Gallery.
-
-### `client-design-system/`
-
-Use `client-design-system/` for the actual client design system:
+## Where Things Live
 
 ```text
-client-design-system/
-├── README.md           Folder overview
-├── style-guide.md      Agent-facing design instructions and context
-├── catalog.json        Structured component/mockup metadata
-├── theme/              Tokens, CSS, fonts, Tailwind config, visual foundations
-├── components/         Reusable design-system components
-└── mockups/            One-off React/TSX design mockups
+docs/                   How to use this repository
+client-design-system/   All client-specific design-system work
+app/                    Localhost Gallery app
+scripts/                Repo tooling
 ```
 
-Agents and designers should treat `client-design-system/` as the encapsulated client-specific workspace.
+For the full map, see [`AGENTS.md`](AGENTS.md).
 
-## Core Terms
+## Key Docs
 
-- **Gallery:** The localhost design-system home at `/`.
-- **Component page:** A page like `/component/button` for a reusable item.
-- **Mockup:** A one-off design instantiation like `/mockup/profile-card`.
-- **Reusable item:** A component or pattern intended to be used across mockups.
-- **One-off mockup:** A disposable design exploration using local data only.
+- [`docs/SETUP_INSTRUCTIONS.md`](docs/SETUP_INSTRUCTIONS.md) - Guided first-time client setup.
+- [`docs/README.md`](docs/README.md) - Repo documentation index.
+- [`docs/glossary.md`](docs/glossary.md) - Shared terms.
+- [`docs/designer-workflow.md`](docs/designer-workflow.md) - Designer workflow.
+- [`docs/agent-workflow.md`](docs/agent-workflow.md) - Agent workflow.
+- [`docs/repository-architecture.md`](docs/repository-architecture.md) - Architecture and source-of-truth model.
 
-## For Designers
+## Client Design System
 
-Ask your coding agent:
+Client-specific work belongs in [`client-design-system/`](client-design-system/):
 
-> Run the design system Gallery.
-
-The agent should run:
-
-```bash
-npm run dev
-```
-
-Then use the sidebar to browse:
-
-- Gallery overview
-- reusable components
-- one-off mockups
-
-The only client-specific text document designers may need to review is:
-
-```text
-client-design-system/style-guide.md
-```
-
-It is mostly agent-facing and read-only for designers, but it should transparently reflect current design-system instructions.
-
-## For Coding Agents
-
-Read these first:
-
-1. [`AGENTS.md`](AGENTS.md)
-2. [`client-design-system/style-guide.md`](client-design-system/style-guide.md)
-3. [`client-design-system/catalog.json`](client-design-system/catalog.json)
-4. Relevant files in `client-design-system/components/` and `client-design-system/theme/`
-
-When creating new work, add one-off React/TSX mockups under:
-
-```text
-client-design-system/mockups/<mockup-name>/
-```
-
-Do not add API calls, auth, production routing, or client app business logic.
-
-## Setup For A Client
-
-Give [`docs/SETUP_INSTRUCTIONS.md`](docs/SETUP_INSTRUCTIONS.md) to an AI coding agent and say:
-
-> Help me set this up for this client.
-
-The agent should replace starter components, theme files, catalog metadata, style-guide guidance, and starter mockups inside `client-design-system/`.
-
-## More Repo Documentation
-
-See [`docs/README.md`](docs/README.md) for repo-level usage documentation.
+- [`client-design-system/style-guide.md`](client-design-system/style-guide.md)
+- [`client-design-system/catalog.json`](client-design-system/catalog.json)
+- [`client-design-system/components/`](client-design-system/components/)
+- [`client-design-system/mockups/`](client-design-system/mockups/)
+- [`client-design-system/theme/`](client-design-system/theme/)

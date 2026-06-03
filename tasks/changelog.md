@@ -4,6 +4,7 @@ Dated history of meaningful task work and decisions.
 
 ## 2026-06-03
 
+- Simplified root `README.md` into a concise entry point that links to setup, docs, workflows, glossary, architecture, and client design-system files without duplicating their content.
 - Moved first-time setup and glossary into `docs/`, shortened `AGENTS.md` into a repo map, and reinforced the two-plane model where client-specific work lives in `client-design-system/`.
 - Completed and archived `tasks/done/2026-06-03_tasks-copy-agent-instructions.md`: replaced duplicate top-right Gallery navigation with a route-specific `Copy agent instructions` button that copies one edit-oriented context sentence for Gallery, style guide, component, and mockup routes.
 - Archived completed task list to `tasks/done/2026-06-03_tasks-repository-simplification-gallery.md` after finishing the unified Gallery app and repository simplification work.
