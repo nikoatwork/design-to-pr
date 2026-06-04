@@ -36,7 +36,7 @@ client-design-system/components/
 import { Button, Card, Input } from "client-design-system/components";
 ```
 
-4. Add theme files to `client-design-system/theme/` and wire required global CSS through the app.
+4. Add theme files to `client-design-system/theme/`. Keep the Gallery shell neutral; client theme tokens should affect components and mockup canvases, not the localhost navigation/chrome. Scope required global CSS to preview canvases when possible.
 5. Update `client-design-system/catalog.json` with plain-language notes for components, variants, states, and designer prompts.
 6. Update `client-design-system/style-guide.md` with agent-facing design guidance.
 7. Run the Gallery and ask the installing user to view the gallery in their browser

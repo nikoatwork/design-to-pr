@@ -256,5 +256,5 @@ if (foundDeps.size > 0) {
 console.log('Next steps:');
 console.log('  1. Review stubbed imports above.');
 console.log('  2. Install any additional npm packages if needed.');
-console.log('  3. Import theme/tokens in app/src/index.css or client-design-system/theme/ if required.');
+console.log('  3. Add theme/tokens in client-design-system/theme/ and keep client styling scoped to preview canvases when possible.');
 console.log('  4. Run: npm run dev and review the Gallery.');

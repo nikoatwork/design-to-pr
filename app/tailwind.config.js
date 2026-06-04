@@ -11,6 +11,7 @@ module.exports = {
   theme: {
     extend: {
       colors: {
+        // Client design-system tokens. Components and mockups may customize these.
         primary: {
           50: '#eff6ff',
           100: '#dbeafe',
@@ -29,6 +30,29 @@ module.exports = {
           200: '#e2e8f0',
         },
         text: {
+          50: '#0f172a',
+          100: '#334155',
+          200: '#475569',
+        },
+        // Stable Gallery shell tokens. Do not customize these for client themes.
+        'gallery-primary': {
+          50: '#eff6ff',
+          100: '#dbeafe',
+          200: '#bfdbfe',
+          300: '#93c5fd',
+          400: '#60a5fa',
+          500: '#3b82f6',
+          600: '#2563eb',
+          700: '#1d4ed8',
+          800: '#1e40af',
+          900: '#1e3a8a',
+        },
+        'gallery-background': {
+          50: '#f8fafc',
+          100: '#f1f5f9',
+          200: '#e2e8f0',
+        },
+        'gallery-text': {
           50: '#0f172a',
           100: '#334155',
           200: '#475569',

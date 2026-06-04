@@ -134,20 +134,20 @@ function Sidebar({ route, navigate }: { route: Route; navigate: (href: string) =
   const navClass = (isActive: boolean) =>
     `flex items-center justify-between gap-3 rounded-lg px-3 py-2 text-sm font-semibold transition ${
       isActive
-        ? "bg-text-50 text-white shadow-sm"
-        : "text-text-100 hover:bg-background-50 hover:text-text-50"
+        ? "bg-gallery-text-50 text-white shadow-sm"
+        : "text-gallery-text-100 hover:bg-gallery-background-50 hover:text-gallery-text-50"
     }`;
 
   return (
-    <aside className="hidden w-80 shrink-0 border-r border-background-200 bg-white lg:block">
+    <aside className="hidden w-80 shrink-0 border-r border-gallery-background-200 bg-white lg:block">
       <div className="sticky top-0 h-screen overflow-y-auto px-5 py-6">
         <div className="mb-7 flex items-center gap-3">
-          <div className="grid size-10 place-items-center rounded-xl bg-text-50 text-white">
+          <div className="grid size-10 place-items-center rounded-xl bg-gallery-text-50 text-white">
             <SwatchBook className="size-5" />
           </div>
           <div>
-            <p className="text-sm font-black tracking-tight text-text-50">Design System</p>
-            <p className="text-xs font-semibold text-text-100">{catalog.name || "Gallery"}</p>
+            <p className="text-sm font-black tracking-tight text-gallery-text-50">Design System</p>
+            <p className="text-xs font-semibold text-gallery-text-100">{catalog.name || "Gallery"}</p>
           </div>
         </div>
 
@@ -164,7 +164,7 @@ function Sidebar({ route, navigate }: { route: Route; navigate: (href: string) =
           </section>
 
           <details open className="group">
-            <summary className="flex cursor-pointer list-none items-center justify-between rounded-lg px-3 py-2 text-xs font-black uppercase tracking-[0.18em] text-primary-700 hover:bg-primary-50">
+            <summary className="flex cursor-pointer list-none items-center justify-between rounded-lg px-3 py-2 text-xs font-black uppercase tracking-[0.18em] text-gallery-primary-700 hover:bg-gallery-primary-50">
               <span className="inline-flex items-center gap-2"><Layers3 className="size-4" /> Components</span>
               <span>{components.length}</span>
             </summary>
@@ -177,14 +177,14 @@ function Sidebar({ route, navigate }: { route: Route; navigate: (href: string) =
                   className={navClass(route.kind === "component" && active === component.slug)}
                 >
                   <span>{component.name}</span>
-                  {!component.metadata && <span className="rounded bg-background-100 px-1.5 py-0.5 text-[10px] uppercase">file</span>}
+                  {!component.metadata && <span className="rounded bg-gallery-background-100 px-1.5 py-0.5 text-[10px] uppercase">file</span>}
                 </Link>
               )) : <EmptyNavItem>No components found</EmptyNavItem>}
             </div>
           </details>
 
           <details open className="group">
-            <summary className="flex cursor-pointer list-none items-center justify-between rounded-lg px-3 py-2 text-xs font-black uppercase tracking-[0.18em] text-primary-700 hover:bg-primary-50">
+            <summary className="flex cursor-pointer list-none items-center justify-between rounded-lg px-3 py-2 text-xs font-black uppercase tracking-[0.18em] text-gallery-primary-700 hover:bg-gallery-primary-50">
               <span className="inline-flex items-center gap-2"><FolderKanban className="size-4" /> Mockups</span>
               <span>{mockups.length}</span>
             </summary>
@@ -197,7 +197,7 @@ function Sidebar({ route, navigate }: { route: Route; navigate: (href: string) =
                   className={navClass(route.kind === "mockup" && active === mockup.slug)}
                 >
                   <span>{mockup.name}</span>
-                  {!mockup.metadata && <span className="rounded bg-background-100 px-1.5 py-0.5 text-[10px] uppercase">folder</span>}
+                  {!mockup.metadata && <span className="rounded bg-gallery-background-100 px-1.5 py-0.5 text-[10px] uppercase">folder</span>}
                 </Link>
               )) : <EmptyNavItem>No mockups found</EmptyNavItem>}
             </div>
@@ -209,7 +209,7 @@ function Sidebar({ route, navigate }: { route: Route; navigate: (href: string) =
 }
 
 function EmptyNavItem({ children }: { children: ReactNode }) {
-  return <div className="rounded-lg px-3 py-2 text-sm font-semibold text-text-100">{children}</div>;
+  return <div className="rounded-lg px-3 py-2 text-sm font-semibold text-gallery-text-100">{children}</div>;
 }
 
 function TopBar({ route }: { route: Route }) {
@@ -228,20 +228,20 @@ function TopBar({ route }: { route: Route }) {
   }
 
   return (
-    <header className="sticky top-0 z-20 border-b border-background-200 bg-white/95 backdrop-blur">
+    <header className="sticky top-0 z-20 border-b border-gallery-background-200 bg-white/95 backdrop-blur">
       <div className="flex h-16 items-center justify-between gap-4 px-4 lg:px-6">
         <div className="flex min-w-0 items-center gap-3">
-          <button className="grid size-10 place-items-center rounded-lg border border-background-200 text-text-100 lg:hidden" type="button" aria-label="Open navigation">
+          <button className="grid size-10 place-items-center rounded-lg border border-gallery-background-200 text-gallery-text-100 lg:hidden" type="button" aria-label="Open navigation">
             <Menu className="size-5" />
           </button>
           <div className="min-w-0">
-            <p className="truncate text-sm font-black tracking-tight text-text-50">{title}</p>
-            <p className="truncate text-xs font-semibold text-text-100">Designer-facing visual map</p>
+            <p className="truncate text-sm font-black tracking-tight text-gallery-text-50">{title}</p>
+            <p className="truncate text-xs font-semibold text-gallery-text-100">Designer-facing visual map</p>
           </div>
         </div>
 
         <button
-          className="inline-flex items-center gap-2 rounded-lg bg-text-50 px-3 py-2 text-sm font-bold text-white shadow-sm transition hover:bg-slate-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-text-50"
+          className="inline-flex items-center gap-2 rounded-lg bg-gallery-text-50 px-3 py-2 text-sm font-bold text-white shadow-sm transition hover:bg-slate-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gallery-text-50"
           onClick={handleCopy}
           type="button"
         >
@@ -255,7 +255,7 @@ function TopBar({ route }: { route: Route }) {
 
 function AppShell({ children, route, navigate }: { children: ReactNode; route: Route; navigate: (href: string) => void }) {
   return (
-    <div className="min-h-screen bg-background-50 text-text-50">
+    <div className="min-h-screen bg-gallery-background-50 text-gallery-text-50">
       <div className="flex min-h-screen">
         <Sidebar route={route} navigate={navigate} />
         <div className="min-w-0 flex-1">
@@ -272,9 +272,9 @@ function Page({ eyebrow, title, description, children }: { eyebrow: string; titl
     <main className="px-4 py-8 lg:px-8">
       <div className="mx-auto max-w-7xl">
         <div className="mb-8">
-          <p className="text-xs font-black uppercase tracking-[0.22em] text-primary-700">{eyebrow}</p>
-          <h1 className="mt-2 text-4xl font-black tracking-tight text-text-50 sm:text-5xl">{title}</h1>
-          {description && <p className="mt-4 max-w-3xl text-base leading-7 text-text-100">{description}</p>}
+          <p className="text-xs font-black uppercase tracking-[0.22em] text-gallery-primary-700">{eyebrow}</p>
+          <h1 className="mt-2 text-4xl font-black tracking-tight text-gallery-text-50 sm:text-5xl">{title}</h1>
+          {description && <p className="mt-4 max-w-3xl text-base leading-7 text-gallery-text-100">{description}</p>}
         </div>
         {children}
       </div>
@@ -303,10 +303,10 @@ function GalleryPage({ navigate }: { navigate: (href: string) => void }) {
           {colorTokens.length > 0 ? (
             <div className="grid grid-cols-[repeat(auto-fit,minmax(10rem,1fr))] gap-3">
               {colorTokens.map((color) => (
-                <div key={color.token} className="min-w-0 rounded-xl border border-background-200 bg-white p-4">
-                  <div className="mb-4 h-16 rounded-lg bg-background-100 ring-1 ring-background-200" />
-                  <p className="truncate font-mono text-sm font-bold text-text-50">{color.token}</p>
-                  <p className="mt-1 text-sm leading-6 text-text-100">{color.use}</p>
+                <div key={color.token} className="min-w-0 rounded-xl border border-gallery-background-200 bg-white p-4">
+                  <div className="mb-4 h-16 rounded-lg bg-gallery-background-100 ring-1 ring-gallery-background-200" />
+                  <p className="truncate font-mono text-sm font-bold text-gallery-text-50">{color.token}</p>
+                  <p className="mt-1 text-sm leading-6 text-gallery-text-100">{color.use}</p>
                 </div>
               ))}
             </div>
@@ -320,11 +320,11 @@ function GalleryPage({ navigate }: { navigate: (href: string) => void }) {
         </Panel>
 
         <Panel title="Agent instructions" icon={<FileText className="size-5" />}>
-          <p className="text-sm leading-6 text-text-100">
+          <p className="text-sm leading-6 text-gallery-text-100">
             The style guide is mostly agent-facing and read-only for designers. It is rendered here for transparency. Repo-level usage docs live in docs/README.md, docs/agent-workflow.md, and docs/designer-workflow.md.
           </p>
-          <pre className="mt-4 max-h-56 w-full max-w-full overflow-auto rounded-xl bg-text-50 p-4 text-xs leading-5 text-white"><code>{styleGuide.slice(0, 1400)}{styleGuide.length > 1400 ? "\n…" : ""}</code></pre>
-          <Link href="/style-guide" navigate={navigate} className="mt-4 inline-flex items-center gap-2 rounded-lg bg-text-50 px-4 py-2 text-sm font-bold text-white hover:bg-slate-800">
+          <pre className="mt-4 max-h-56 w-full max-w-full overflow-auto rounded-xl bg-gallery-text-50 p-4 text-xs leading-5 text-white"><code>{styleGuide.slice(0, 1400)}{styleGuide.length > 1400 ? "\n…" : ""}</code></pre>
+          <Link href="/style-guide" navigate={navigate} className="mt-4 inline-flex items-center gap-2 rounded-lg bg-gallery-text-50 px-4 py-2 text-sm font-bold text-white hover:bg-slate-800">
             Open style guide <ArrowRight className="size-4" />
           </Link>
         </Panel>
@@ -370,7 +370,7 @@ function GalleryPage({ navigate }: { navigate: (href: string) => void }) {
         <Panel title="Useful designer requests" icon={<Sparkles className="size-5" />} className="mt-8">
           <div className="grid gap-3 md:grid-cols-2">
             {starterRequests.map((request) => (
-              <div key={request} className="rounded-xl border border-background-200 bg-background-50 p-4 text-sm font-semibold text-text-100">
+              <div key={request} className="rounded-xl border border-gallery-background-200 bg-gallery-background-50 p-4 text-sm font-semibold text-gallery-text-100">
                 “{request}”
               </div>
             ))}
@@ -383,20 +383,20 @@ function GalleryPage({ navigate }: { navigate: (href: string) => void }) {
 
 function MetricCard({ icon, label, value }: { icon: ReactNode; label: string; value: ReactNode }) {
   return (
-    <div className="rounded-2xl border border-background-200 bg-white p-5 shadow-sm">
-      <div className="grid size-10 place-items-center rounded-xl bg-primary-50 text-primary-700">{icon}</div>
-      <p className="mt-4 text-2xl font-black tracking-tight text-text-50">{value}</p>
-      <p className="mt-1 text-sm font-semibold text-text-100">{label}</p>
+    <div className="rounded-2xl border border-gallery-background-200 bg-white p-5 shadow-sm">
+      <div className="grid size-10 place-items-center rounded-xl bg-gallery-primary-50 text-gallery-primary-700">{icon}</div>
+      <p className="mt-4 text-2xl font-black tracking-tight text-gallery-text-50">{value}</p>
+      <p className="mt-1 text-sm font-semibold text-gallery-text-100">{label}</p>
     </div>
   );
 }
 
 function Panel({ title, icon, children, className = "" }: { title: string; icon: ReactNode; children: ReactNode; className?: string }) {
   return (
-    <section className={`min-w-0 rounded-2xl border border-background-200 bg-white p-5 shadow-sm ${className}`}>
+    <section className={`min-w-0 rounded-2xl border border-gallery-background-200 bg-white p-5 shadow-sm ${className}`}>
       <div className="mb-5 flex items-center gap-3">
-        <div className="grid size-10 place-items-center rounded-xl bg-background-50 text-primary-700">{icon}</div>
-        <h2 className="text-xl font-black tracking-tight text-text-50">{title}</h2>
+        <div className="grid size-10 place-items-center rounded-xl bg-gallery-background-50 text-gallery-primary-700">{icon}</div>
+        <h2 className="text-xl font-black tracking-tight text-gallery-text-50">{title}</h2>
       </div>
       {children}
     </section>
@@ -405,19 +405,19 @@ function Panel({ title, icon, children, className = "" }: { title: string; icon:
 
 function InfoLine({ label, value }: { label: string; value: string }) {
   return (
-    <div className="rounded-xl border border-background-200 bg-background-50 p-4">
-      <p className="text-xs font-black uppercase tracking-[0.18em] text-primary-700">{label}</p>
-      <p className="mt-2 text-sm leading-6 text-text-100">{value}</p>
+    <div className="rounded-xl border border-gallery-background-200 bg-gallery-background-50 p-4">
+      <p className="text-xs font-black uppercase tracking-[0.18em] text-gallery-primary-700">{label}</p>
+      <p className="mt-2 text-sm leading-6 text-gallery-text-100">{value}</p>
     </div>
   );
 }
 
 function EmptyState({ title, body }: { title: string; body: string }) {
   return (
-    <div className="rounded-xl border border-dashed border-background-200 bg-background-50 p-6 text-center">
-      <PackageOpen className="mx-auto size-8 text-text-100" />
-      <h3 className="mt-3 text-base font-bold text-text-50">{title}</h3>
-      <p className="mt-1 text-sm text-text-100">{body}</p>
+    <div className="rounded-xl border border-dashed border-gallery-background-200 bg-gallery-background-50 p-6 text-center">
+      <PackageOpen className="mx-auto size-8 text-gallery-text-100" />
+      <h3 className="mt-3 text-base font-bold text-gallery-text-50">{title}</h3>
+      <p className="mt-1 text-sm text-gallery-text-100">{body}</p>
     </div>
   );
 }
@@ -426,8 +426,8 @@ function InventorySection({ title, description, emptyTitle, emptyBody, children 
   return (
     <section className="mt-8">
       <div className="mb-4">
-        <h2 className="text-2xl font-black tracking-tight text-text-50">{title}</h2>
-        <p className="mt-1 text-sm text-text-100">{description}</p>
+        <h2 className="text-2xl font-black tracking-tight text-gallery-text-50">{title}</h2>
+        <p className="mt-1 text-sm text-gallery-text-100">{description}</p>
       </div>
       {children.length > 0 ? <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">{children}</div> : <EmptyState title={emptyTitle} body={emptyBody} />}
     </section>
@@ -436,11 +436,11 @@ function InventorySection({ title, description, emptyTitle, emptyBody, children 
 
 function InventoryCard({ title, label, body, href, navigate }: { title: string; label: string; body: string; href: string; navigate: (href: string) => void }) {
   return (
-    <Link href={href} navigate={navigate} className="group rounded-2xl border border-background-200 bg-white p-5 shadow-sm transition hover:-translate-y-0.5 hover:border-primary-200 hover:shadow-md">
-      <p className="text-xs font-black uppercase tracking-[0.18em] text-primary-700">{label}</p>
-      <h3 className="mt-2 text-xl font-black tracking-tight text-text-50 group-hover:text-primary-700">{title}</h3>
-      <p className="mt-3 min-h-16 text-sm leading-6 text-text-100">{body}</p>
-      <span className="mt-4 inline-flex items-center gap-2 text-sm font-bold text-text-50">Open <ArrowRight className="size-4" /></span>
+    <Link href={href} navigate={navigate} className="group rounded-2xl border border-gallery-background-200 bg-white p-5 shadow-sm transition hover:-translate-y-0.5 hover:border-gallery-primary-200 hover:shadow-md">
+      <p className="text-xs font-black uppercase tracking-[0.18em] text-gallery-primary-700">{label}</p>
+      <h3 className="mt-2 text-xl font-black tracking-tight text-gallery-text-50 group-hover:text-gallery-primary-700">{title}</h3>
+      <p className="mt-3 min-h-16 text-sm leading-6 text-gallery-text-100">{body}</p>
+      <span className="mt-4 inline-flex items-center gap-2 text-sm font-bold text-gallery-text-50">Open <ArrowRight className="size-4" /></span>
     </Link>
   );
 }
@@ -468,8 +468,8 @@ function ComponentPage({ slug }: { slug: string }) {
     >
       <div className="grid gap-6 xl:grid-cols-[1fr_22rem]">
         <section>
-          <div className="mb-4 rounded-2xl border border-background-200 bg-white p-4 shadow-sm">
-            <p className="text-xs font-black uppercase tracking-[0.18em] text-primary-700">Standard component canvas</p>
+          <div className="mb-4 rounded-2xl border border-gallery-background-200 bg-white p-4 shadow-sm">
+            <p className="text-xs font-black uppercase tracking-[0.18em] text-gallery-primary-700">Standard component canvas</p>
             <div className="mt-4">{renderComponentExample(component.slug)}</div>
           </div>
         </section>
@@ -486,7 +486,7 @@ function ComponentPage({ slug }: { slug: string }) {
             {chips.length > 0 ? (
               <div className="flex flex-wrap gap-2">
                 {chips.map((chip) => (
-                  <span key={`${chip.label}-${chip.value}`} className="rounded-full bg-background-100 px-3 py-1 text-xs font-bold text-text-100">
+                  <span key={`${chip.label}-${chip.value}`} className="rounded-full bg-gallery-background-100 px-3 py-1 text-xs font-bold text-gallery-text-100">
                     {chip.label}: {chip.value}
                   </span>
                 ))}
@@ -516,15 +516,15 @@ function MockupPage({ slug }: { slug: string }) {
       title={mockup.name}
       description={mockup.purpose || "This mockup was discovered from folder structure. Add catalog metadata to describe its purpose."}
     >
-      <div className="rounded-2xl border border-background-200 bg-white p-4 shadow-sm">
-        <div className="mb-4 flex flex-wrap items-center justify-between gap-3 border-b border-background-200 pb-4">
+      <div className="rounded-2xl border border-gallery-background-200 bg-white p-4 shadow-sm">
+        <div className="mb-4 flex flex-wrap items-center justify-between gap-3 border-b border-gallery-background-200 pb-4">
           <div>
-            <p className="text-xs font-black uppercase tracking-[0.18em] text-primary-700">Standard mockup canvas</p>
-            <p className="mt-1 text-sm text-text-100">Source: client-design-system/mockups/{mockup.slug}/src/App.tsx</p>
+            <p className="text-xs font-black uppercase tracking-[0.18em] text-gallery-primary-700">Standard mockup canvas</p>
+            <p className="mt-1 text-sm text-gallery-text-100">Source: client-design-system/mockups/{mockup.slug}/src/App.tsx</p>
           </div>
-          <span className="rounded-full bg-background-100 px-3 py-1 text-xs font-bold text-text-100">Embedded in Gallery shell</span>
+          <span className="rounded-full bg-gallery-background-100 px-3 py-1 text-xs font-bold text-gallery-text-100">Embedded in Gallery shell</span>
         </div>
-        <div className="overflow-hidden rounded-xl border border-background-200 bg-background-50">
+        <div className="client-design-canvas overflow-hidden rounded-xl border border-gallery-background-200 bg-background-50">
           <MockupComponent />
         </div>
       </div>
@@ -539,8 +539,8 @@ function StyleGuidePage() {
       title="Style guide"
       description="Rendered from client-design-system/style-guide.md for transparency. Designers can review it, but agents maintain it from project direction."
     >
-      <div className="rounded-2xl border border-background-200 bg-white p-5 shadow-sm">
-        <pre className="overflow-auto whitespace-pre-wrap rounded-xl bg-text-50 p-5 text-sm leading-6 text-white"><code>{styleGuide}</code></pre>
+      <div className="rounded-2xl border border-gallery-background-200 bg-white p-5 shadow-sm">
+        <pre className="overflow-auto whitespace-pre-wrap rounded-xl bg-gallery-text-50 p-5 text-sm leading-6 text-white"><code>{styleGuide}</code></pre>
       </div>
     </Page>
   );
