@@ -46,7 +46,9 @@ Use [`style-guide.md`](style-guide.md) for agent-facing design-system instructio
 
 ### Catalog metadata
 
-Use [`catalog.json`](catalog.json) for structured metadata that the localhost Gallery can use for labels, descriptions, variants, states, usage guidance, and designer prompts.
+Use [`catalog.json`](catalog.json) as the Gallery-facing source of truth for structured metadata. This includes foundation blocks shown on the Gallery overview, such as Colors, Typography, and Spacing, plus labels, descriptions, variants, states, usage guidance, designer prompts, and mockup metadata.
+
+Theme files can still provide the CSS, fonts, or variables that make components render correctly, but anything that should be listed in the Gallery overview should also be represented in `catalog.json`.
 
 ## What Does Not Belong Here
 

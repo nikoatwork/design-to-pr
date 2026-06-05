@@ -13,7 +13,7 @@ Ask each question one by one and wait for their input to ask the next question.
 0. Welcome the Designer and explain that we'll get them a design system setup in minutes.
 1. Do you want to import styles and design guidelines from a company website? allow them to paste website and extract colors and shapes from them by browsing the website. Follow `docs/how-to-extract-design-from-url.md` so this populates our design sytem.
 2. Which components should the first example use? Pick 4-8 components maximum.
-3. What brand colors, fonts, or visual tokens should be added to `client-design-system/theme/` or the app CSS? (if 1 was answered with link, infer colors/fonts)
+3. What brand colors, fonts, typography, spacing, or visual tokens should be added to `client-design-system/catalog.json` and, when needed for rendering, `client-design-system/theme/` or the app CSS? The Catalog is the source of truth for what the Gallery displays in its Colors, Typography, and Spacing blocks. (If 1 was answered with a link, infer colors/fonts.)
 4. Are there any required wrappers, fonts, or global CSS files needed to make the components look correct?
 5. What other design instructions should we keep in mind? they will be captured in `client-design-system/style-guide.md` for future agents work
 
@@ -38,8 +38,8 @@ client-design-system/components/
 import { Button, Card, Input } from "client-design-system/components";
 ```
 
-4. Add theme files to `client-design-system/theme/`. Keep the Gallery shell neutral; client theme tokens should affect components and mockup canvases, not the localhost navigation/chrome. Scope required global CSS to preview canvases when possible.
-5. Update `client-design-system/catalog.json` with plain-language notes for components, variants, states, and designer prompts.
+4. Add theme files to `client-design-system/theme/` only when needed for actual rendering: CSS variables, fonts, global CSS, or token files used by components/mockups. Keep the Gallery shell neutral; client theme tokens should affect components and mockup canvases, not the localhost navigation/chrome. Scope required global CSS to preview canvases when possible.
+5. Update `client-design-system/catalog.json`. This is the Gallery-facing source of truth for structured design-system metadata, including foundation blocks such as Colors, Typography, and Spacing, plus component labels, variants, states, usage guidance, and designer prompts. If a value should be visible in the Gallery overview, put it in the Catalog.
 6. Update `client-design-system/style-guide.md` with agent-facing design guidance.
 7. Run the Gallery and ask the installing user to view the gallery in their browser
 ```bash

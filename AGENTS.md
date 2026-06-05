@@ -38,8 +38,8 @@ All client-specific design work belongs in `client-design-system/`.
 
 - `client-design-system/README.md` - Client design-system folder overview.
 - `client-design-system/style-guide.md` - Agent-facing design instructions.
-- `client-design-system/catalog.json` - Structured metadata for Gallery, components, and mockups.
-- `client-design-system/theme/` - Tokens, CSS, fonts, and visual foundations.
+- `client-design-system/catalog.json` - Gallery-facing source of truth for structured metadata: foundation blocks such as Colors, Typography, and Spacing; component labels; variants; states; usage guidance; designer prompts; and mockup metadata.
+- `client-design-system/theme/` - Rendering assets such as CSS variables, token files, fonts, and global CSS used by components/mockups. Do not rely on theme files alone to populate Gallery overview metadata; mirror visible foundations in `catalog.json`.
 - `client-design-system/components/` - Reusable components.
 - `client-design-system/mockups/` - One-off React/TSX mockups.
 

@@ -4,12 +4,37 @@
   "howToPreview": "Ask the agent: Run the design system Gallery. It should run npm run dev.",
   "foundations": {
     "colors": [
-      { "token": "primary", "use": "Main actions, focus rings, informative emphasis" },
-      { "token": "background", "use": "Page backgrounds, panels, dividers, quiet grouped areas" },
-      { "token": "text", "use": "Headings, body copy, secondary labels" }
+      { "token": "primary-50", "value": "#eff6ff", "use": "Quiet blue emphasis backgrounds" },
+      { "token": "primary-100", "value": "#dbeafe", "use": "Soft selected and hover states" },
+      { "token": "primary-500", "value": "#3b82f6", "use": "Main informative actions and progress" },
+      { "token": "primary-700", "value": "#1d4ed8", "use": "Strong links, focus, and emphasis text" },
+      { "token": "background-50", "value": "#f8fafc", "use": "Page background and quiet grouped areas" },
+      { "token": "background-100", "value": "#f1f5f9", "use": "Subtle fills and hover states" },
+      { "token": "background-200", "value": "#e2e8f0", "use": "Borders, dividers, and inactive tracks" },
+      { "token": "text-50", "value": "#0f172a", "use": "Primary headings and high-emphasis copy" },
+      { "token": "text-100", "value": "#334155", "use": "Body copy and secondary labels" },
+      { "token": "text-200", "value": "#475569", "use": "Muted supporting labels" },
+      { "token": "emerald-50", "value": "#ecfdf5", "use": "Success badge backgrounds" },
+      { "token": "emerald-500", "value": "#10b981", "use": "Accent actions and completed states" },
+      { "token": "emerald-700", "value": "#047857", "use": "Success text" },
+      { "token": "amber-50", "value": "#fffbeb", "use": "Warning badge backgrounds" },
+      { "token": "amber-700", "value": "#b45309", "use": "Warning text" },
+      { "token": "rose-50", "value": "#fff1f2", "use": "Danger badge backgrounds" },
+      { "token": "rose-700", "value": "#be123c", "use": "Danger text" }
     ],
-    "shape": "Rounded corners are soft and practical. Cards and controls use rounded-lg by default.",
-    "density": "Comfortable spacing for review-friendly mockups rather than dense production screens."
+    "typography": [
+      { "token": "heading-lg", "value": "700 24px/32px ui-sans-serif, system-ui, sans-serif", "use": "Page titles and major card headings", "sample": "Design system heading" },
+      { "token": "heading-md", "value": "600 18px/28px ui-sans-serif, system-ui, sans-serif", "use": "Section titles and compact headings", "sample": "Section heading" },
+      { "token": "body", "value": "400 14px/22px ui-sans-serif, system-ui, sans-serif", "use": "Default readable body copy", "sample": "Readable body copy for review." },
+      { "token": "label", "value": "600 12px/16px ui-sans-serif, system-ui, sans-serif", "use": "Buttons, badges, tabs, and compact labels", "sample": "Compact label" }
+    ],
+    "spacing": [
+      { "token": "space-1", "value": "4px", "use": "Tiny icon/text offsets" },
+      { "token": "space-2", "value": "8px", "use": "Tight inline gaps" },
+      { "token": "space-3", "value": "12px", "use": "Default control and card inner gaps" },
+      { "token": "space-5", "value": "20px", "use": "Comfortable card padding" },
+      { "token": "space-8", "value": "32px", "use": "Larger section separation" }
+    ]
   },
   "components": [
     {

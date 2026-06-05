@@ -24,9 +24,9 @@ type Catalog = {
   audience?: string;
   howToPreview?: string;
   foundations?: {
-    colors?: { token: string; use: string }[];
-    shape?: string;
-    density?: string;
+    colors?: { token: string; value?: string; use: string }[];
+    typography?: { token: string; value: string; use: string; sample?: string }[];
+    spacing?: { token: string; value: string; use: string }[];
   };
   components?: CatalogComponent[];
   mockups?: CatalogMockup[];

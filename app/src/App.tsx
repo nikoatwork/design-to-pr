@@ -1,7 +1,6 @@
 import { useEffect, useMemo, useState, type ReactNode } from "react";
 import {
   ArrowRight,
-  BookOpen,
   Box,
   CheckCircle2,
   Copy,
@@ -11,8 +10,9 @@ import {
   Layers3,
   Menu,
   PackageOpen,
-  Sparkles,
-  SwatchBook
+  Ruler,
+  SwatchBook,
+  Type
 } from "lucide-react";
 import styleGuide from "../../client-design-system/style-guide.md?raw";
 import {
@@ -270,7 +270,7 @@ function AppShell({ children, route, navigate }: { children: ReactNode; route: R
 function Page({ eyebrow, title, description, children }: { eyebrow: string; title: string; description?: string; children: ReactNode }) {
   return (
     <main className="px-3 py-5 lg:px-5">
-      <div className="mx-auto max-w-6xl">
+      <div className="mx-auto max-w-[100rem]">
         <div className="mb-5">
           <p className="text-[10px] font-semibold uppercase tracking-[0.14em] text-gallery-primary-700">{eyebrow}</p>
           <h1 className="mt-1 text-2xl font-semibold tracking-tight text-gallery-text-50 sm:text-3xl">{title}</h1>
@@ -282,9 +282,17 @@ function Page({ eyebrow, title, description, children }: { eyebrow: string; titl
   );
 }
 
+function spacingPreviewWidth(value: string) {
+  const numeric = Number.parseFloat(value);
+  if (!Number.isFinite(numeric)) return value;
+  const pixels = value.includes("rem") ? numeric * 16 : numeric;
+  return `${Math.min(Math.max(pixels * 3, 12), 160)}px`;
+}
+
 function GalleryPage({ navigate }: { navigate: (href: string) => void }) {
-  const starterRequests = catalog.starterRequestsForAgents || [];
   const colorTokens = catalog.foundations?.colors || [];
+  const typographyTokens = catalog.foundations?.typography || [];
+  const spacingTokens = catalog.foundations?.spacing || [];
 
   return (
     <Page
@@ -292,38 +300,77 @@ function GalleryPage({ navigate }: { navigate: (href: string) => void }) {
       title={catalog.name || "Design system Gallery"}
       description="A visual home for designers to inspect the current design-system state, browse reusable items, and open one-off mockups."
     >
-      <div className="grid gap-2.5 md:grid-cols-3">
-        <MetricCard icon={<Layers3 className="size-4" />} label="Reusable components" value={components.length} />
-        <MetricCard icon={<FolderKanban className="size-4" />} label="One-off mockups" value={mockups.length} />
-        <MetricCard icon={<BookOpen className="size-4" />} label="Guidance source" value="style-guide.md" />
-      </div>
-
-      <section className="mt-5 grid min-w-0 items-start gap-2.5 xl:grid-cols-[minmax(0,1fr)_minmax(0,1fr)]">
-        <Panel title="Foundations" icon={<SwatchBook className="size-4" />}>
+      <section className="flex flex-wrap items-start gap-2.5">
+        <Panel title="Colors" icon={<SwatchBook className="size-4" />} className="flex-[2_1_30rem]">
           {colorTokens.length > 0 ? (
-            <div className="grid grid-cols-[repeat(auto-fit,minmax(10rem,1fr))] gap-2.5">
+            <div className="grid grid-cols-[repeat(auto-fit,minmax(13rem,1fr))] gap-2.5">
               {colorTokens.map((color) => (
-                <div key={color.token} className="min-w-0 rounded-md border border-gallery-background-200 bg-white p-3">
-                  <div className="mb-3 h-10 rounded-md bg-gallery-background-100 ring-1 ring-gallery-background-200" />
-                  <p className="truncate font-mono text-xs font-medium text-gallery-text-50">{color.token}</p>
-                  <p className="mt-1 text-xs leading-5 text-gallery-text-100">{color.use}</p>
+                <div key={color.token} className="flex min-w-0 items-start gap-2.5 rounded-md border border-gallery-background-200 bg-white p-3">
+                  <span
+                    className="mt-0.5 size-5 shrink-0 rounded-full border border-gallery-background-200 shadow-sm ring-2 ring-white"
+                    style={{ backgroundColor: color.value || "transparent" }}
+                    aria-label={color.value ? `${color.token} color ${color.value}` : `${color.token} color`}
+                  />
+                  <div className="min-w-0">
+                    <div className="flex min-w-0 flex-wrap items-baseline gap-x-2 gap-y-1">
+                      <p className="truncate font-mono text-xs font-medium text-gallery-text-50">{color.token}</p>
+                      {color.value && <p className="font-mono text-[11px] text-gallery-text-200">{color.value}</p>}
+                    </div>
+                    <p className="mt-1 text-xs leading-5 text-gallery-text-100">{color.use}</p>
+                  </div>
                 </div>
               ))}
             </div>
           ) : (
-            <EmptyState title="No foundation metadata yet" body="Add color, shape, and density notes to client-design-system/catalog.json." />
+            <EmptyState title="No color metadata yet" body="Add color tokens to client-design-system/catalog.json." />
           )}
-          <div className="mt-3 grid grid-cols-[repeat(auto-fit,minmax(14rem,1fr))] gap-2.5">
-            <InfoLine label="Shape" value={catalog.foundations?.shape || "No shape guidance yet."} />
-            <InfoLine label="Density" value={catalog.foundations?.density || "No density guidance yet."} />
-          </div>
         </Panel>
 
-        <Panel title="Agent instructions" icon={<FileText className="size-4" />}>
+        <Panel title="Typography" icon={<Type className="size-4" />} className="flex-[1_1_20rem]">
+          {typographyTokens.length > 0 ? (
+              <div className="grid gap-2.5">
+                {typographyTokens.map((item) => (
+                  <div key={item.token} className="rounded-md border border-gallery-background-200 bg-white p-3">
+                    <div className="flex flex-wrap items-baseline justify-between gap-2">
+                      <p className="font-mono text-xs font-medium text-gallery-text-50">{item.token}</p>
+                      <p className="font-mono text-[11px] text-gallery-text-200">{item.value}</p>
+                    </div>
+                    <p className="mt-2 text-gallery-text-50" style={{ font: item.value }}>{item.sample || "The quick brown fox"}</p>
+                    <p className="mt-1 text-xs leading-5 text-gallery-text-100">{item.use}</p>
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <EmptyState title="No typography metadata yet" body="Add type tokens to client-design-system/catalog.json." />
+            )}
+        </Panel>
+
+        <Panel title="Spacing" icon={<Ruler className="size-4" />} className="flex-[1_1_20rem]">
+          {spacingTokens.length > 0 ? (
+              <div className="grid gap-2.5">
+                {spacingTokens.map((item) => (
+                  <div key={item.token} className="rounded-md border border-gallery-background-200 bg-white p-3">
+                    <div className="flex flex-wrap items-baseline justify-between gap-2">
+                      <p className="font-mono text-xs font-medium text-gallery-text-50">{item.token}</p>
+                      <p className="font-mono text-[11px] text-gallery-text-200">{item.value}</p>
+                    </div>
+                    <div className="mt-2 h-2 rounded-full bg-gallery-background-100">
+                      <div className="h-2 max-w-full rounded-full bg-gallery-text-50" style={{ width: spacingPreviewWidth(item.value) }} />
+                    </div>
+                    <p className="mt-1 text-xs leading-5 text-gallery-text-100">{item.use}</p>
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <EmptyState title="No spacing metadata yet" body="Add spacing tokens to client-design-system/catalog.json." />
+            )}
+        </Panel>
+
+        <Panel title="Agent instructions" icon={<FileText className="size-4" />} className="flex-[1_1_20rem]">
           <p className="text-xs leading-5 text-gallery-text-100">
-            The style guide is mostly agent-facing and read-only for designers. It is rendered here for transparency. Repo-level usage docs live in docs/README.md, docs/agent-workflow.md, and docs/designer-workflow.md.
+              The style guide is mostly agent-facing and read-only for designers. It is rendered here for transparency. Repo-level usage docs live in docs/README.md, docs/agent-workflow.md, and docs/designer-workflow.md.
           </p>
-          <pre className="mt-3 max-h-56 w-full max-w-full overflow-auto rounded-md bg-gallery-text-50 p-3 text-xs leading-5 text-white"><code>{styleGuide.slice(0, 1400)}{styleGuide.length > 1400 ? "\n…" : ""}</code></pre>
+          <pre className="mt-3 max-h-44 w-full max-w-full overflow-auto rounded-md bg-gallery-text-50 p-3 text-xs leading-5 text-white"><code>{styleGuide.slice(0, 900)}{styleGuide.length > 900 ? "\n…" : ""}</code></pre>
           <Link href="/style-guide" navigate={navigate} className="mt-3 inline-flex items-center gap-1.5 rounded-md bg-gallery-text-50 px-2.5 py-1.5 text-xs font-medium text-white hover:bg-gallery-text-100">
             Open style guide <ArrowRight className="size-4" />
           </Link>
@@ -347,47 +394,7 @@ function GalleryPage({ navigate }: { navigate: (href: string) => void }) {
           />
         ))}
       </InventorySection>
-
-      <InventorySection
-        title="One-off mockups"
-        description="Disposable design instantiations using local mock data."
-        emptyTitle="No mockups found"
-        emptyBody="Add a folder under client-design-system/mockups/ or run npm run new-flow <name>."
-      >
-        {mockups.map((mockup) => (
-          <InventoryCard
-            key={mockup.slug}
-            title={mockup.name}
-            label="Mockup"
-            body={mockup.purpose || "Discovered from folder structure. Add catalog metadata for purpose and status."}
-            href={`/mockup/${mockup.slug}`}
-            navigate={navigate}
-          />
-        ))}
-      </InventorySection>
-
-      {starterRequests.length > 0 && (
-        <Panel title="Useful designer requests" icon={<Sparkles className="size-4" />} className="mt-5">
-          <div className="grid gap-2.5 md:grid-cols-2">
-            {starterRequests.map((request) => (
-              <div key={request} className="rounded-md border border-gallery-background-200 bg-gallery-background-50 p-3 text-xs font-medium text-gallery-text-100">
-                “{request}”
-              </div>
-            ))}
-          </div>
-        </Panel>
-      )}
     </Page>
-  );
-}
-
-function MetricCard({ icon, label, value }: { icon: ReactNode; label: string; value: ReactNode }) {
-  return (
-    <div className="rounded-lg border border-gallery-background-200 bg-white p-3">
-      <div className="grid size-8 place-items-center rounded-md bg-gallery-primary-50 text-gallery-primary-700">{icon}</div>
-      <p className="mt-3 text-xl font-semibold tracking-tight text-gallery-text-50">{value}</p>
-      <p className="mt-1 text-xs font-medium text-gallery-text-100">{label}</p>
-    </div>
   );
 }
 
