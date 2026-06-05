@@ -8,6 +8,8 @@ Get a non-technical designer to view the impressive and populated design-system 
 
 ## Ask the installing user These Questions First
 
+Ask each question one by one and wait for their input to ask the next question. 
+
 0. Welcome the Designer and explain that we'll get them a design system setup in minutes.
 1. Do you want to import styles and design guidelines from a company website? allow them to paste website and extract colors and shapes from them by browsing the website. Follow `docs/how-to-extract-design-from-url.md` so this populates our design sytem.
 2. Which components should the first example use? Pick 4-8 components maximum.

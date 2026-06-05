@@ -18,14 +18,6 @@ You get a gallery to see and feel
 And you can create new components and mockups right in this repository.
 
 To install this repository, check the docs/SETUP_INSTRUCTIONS.md
-
-To Run the local Gallery:
-
-```bash
-npm install
-npm run dev
-```
-
 Then open `localhost:5173` to inspect the design system, component pages, mockups, and style guide.
 
 ## First-Time Setup
@@ -35,6 +27,17 @@ If you are setting this repo up for a client, give this to your coding agent:
 ```text
 Help me set this up for this client. Follow docs/SETUP_INSTRUCTIONS.md.
 ```
+
+this will guide you through the setup and launch the gallery for you.
+In case you need or want to run this manually use the commands below.
+
+To Run the local Gallery:
+
+```bash
+npm install
+npm run dev
+```
+
 
 ## Where Things Live
 
@@ -65,3 +68,4 @@ Client-specific work belongs in [`client-design-system/`](client-design-system/)
 - [`client-design-system/components/`](client-design-system/components/)
 - [`client-design-system/mockups/`](client-design-system/mockups/)
 - [`client-design-system/theme/`](client-design-system/theme/)
+

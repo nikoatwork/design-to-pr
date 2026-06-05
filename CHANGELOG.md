@@ -1,5 +1,12 @@
 # Changelog
 
+## 2026-06-05
+
+### Changed
+
+- Restyled the default Gallery shell toward a compact, Linear-inspired monochrome interface with tighter spacing, smaller type, flatter surfaces, and black/gray Gallery tokens.
+- Kept client design-system tokens unchanged so component and mockup previews retain client styling.
+
 ## 2026-06-04
 
 ### Changed
